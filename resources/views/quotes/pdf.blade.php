@@ -6,442 +6,448 @@
     <style>
         @page {
             margin: 0;
+            padding: 0;
         }
 
-        * {
+        @page :first {
             margin: 0;
-            padding: 0;
-            box-sizing: border-box;
         }
 
         body {
             font-family: 'Helvetica', Arial, sans-serif;
-            color: #1a1a2e;
-            background: #fff;
+            color: #222;
             font-size: 10pt;
-            line-height: 1.6;
+            line-height: 1.55;
+            margin: 0;
+            padding: 0;
         }
 
-        .page-break {
-            page-break-after: always;
-        }
-
-        /* ── Accent bar ── */
-        .accent-bar {
-            background: #C8102E;
-            height: 8px;
+        /* ══════════════════════════════════════
+   COVER PAGE
+══════════════════════════════════════ */
+        .cover-top-bar {
+            background-color: #C8102E;
+            height: 10px;
             width: 100%;
         }
 
-        .accent-bar-thin {
-            background: linear-gradient(90deg, #C8102E, #e8354f);
-            height: 4px;
-            width: 100%;
+        .cover-body {
+            padding: 35px 45px 25px 45px;
         }
 
-        /* ── Cover ── */
-        .cover-wrap {
-            padding: 40px 48px 32px;
-        }
-
-        .logo-table {
+        .cover-logo-table {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 48px;
+            margin-bottom: 35px;
         }
 
-        .logo-table td {
+        .cover-logo-table td {
             vertical-align: middle;
         }
 
-        .logo-img {
-            height: 54px;
+        .cover-logo-img {
+            height: 55px;
             width: auto;
         }
 
-        .brand-text {
-            font-size: 20pt;
+        .cover-company-name {
+            font-size: 22pt;
             font-weight: bold;
             color: #1a1a2e;
-            letter-spacing: -0.5px;
             text-align: right;
+            letter-spacing: -0.5px;
         }
 
-        .brand-text span {
+        .cover-company-name span {
             color: #C8102E;
         }
 
-        .brand-sub {
+        .cover-tagline {
             font-size: 7.5pt;
-            color: #999;
+            color: #aaa;
             letter-spacing: 2px;
             text-transform: uppercase;
             text-align: right;
-            margin-top: 3px;
+            margin-top: 4px;
         }
 
-        /* Hero */
-        .hero-label {
-            font-size: 7.5pt;
+        .cover-title-label {
+            font-size: 8pt;
             font-weight: bold;
             color: #C8102E;
             letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .hero-title {
-            font-size: 38pt;
+        .cover-title-main {
+            font-size: 36pt;
             font-weight: bold;
             color: #1a1a2e;
-            letter-spacing: -1.5px;
+            letter-spacing: -1px;
             line-height: 1;
             margin-bottom: 8px;
         }
 
-        .hero-ref {
+        .cover-title-ref {
             font-size: 10pt;
-            color: #8a92a0;
-            margin-bottom: 40px;
-        }
-
-        /* Divider */
-        .divider {
-            height: 2px;
-            background: #f0f0f0;
+            color: #999;
             margin-bottom: 32px;
         }
 
-        .divider-red {
-            height: 2px;
-            background: #C8102E;
-            width: 60px;
-            margin-bottom: 24px;
+        .cover-divider {
+            border-bottom: 2px solid #f0f0f0;
+            margin-bottom: 28px;
         }
 
         /* Meta grid */
-        .meta-table {
+        .meta-grid {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 36px;
+            margin-bottom: 30px;
         }
 
-        .meta-table td {
-            padding: 16px 0;
-            border-bottom: 1px solid #f0f2f5;
+        .meta-grid td {
+            padding: 14px 0;
+            border-bottom: 1px solid #f0f0f0;
             vertical-align: top;
             width: 50%;
         }
 
-        .meta-table td.right-col {
-            padding-left: 32px;
+        .meta-grid td.meta-right {
+            padding-left: 30px;
         }
 
-        .meta-label {
+        .meta-lbl {
             font-size: 7pt;
             font-weight: bold;
             color: #C8102E;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
-        .meta-value {
+        .meta-val {
             font-size: 11pt;
             font-weight: bold;
             color: #1a1a2e;
         }
 
-        /* Client block */
-        .client-block {
-            background: #f8f9fb;
+        /* Client box */
+        .client-box {
+            background-color: #f7f8fa;
             border-left: 5px solid #C8102E;
-            padding: 22px 24px;
-            margin-bottom: 32px;
+            padding: 20px 22px;
+            margin-bottom: 28px;
         }
 
-        .client-label {
+        .client-box-lbl {
             font-size: 7pt;
             font-weight: bold;
             color: #C8102E;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .client-name {
+        .client-box-name {
             font-size: 16pt;
             font-weight: bold;
             color: #1a1a2e;
-            margin-bottom: 6px;
+            margin-bottom: 5px;
         }
 
-        .client-addr {
+        .client-box-addr {
             font-size: 10pt;
             color: #555;
             line-height: 1.7;
         }
 
-        /* Project detail table */
-        .project-table {
+        /* Project info table */
+        .project-info {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 32px;
+            margin-bottom: 25px;
         }
 
-        .project-table td {
-            padding: 12px 0;
-            border-bottom: 1px solid #f0f2f5;
-            vertical-align: top;
+        .project-info td {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
             font-size: 10pt;
+            vertical-align: top;
         }
 
-        .project-table td.proj-label {
+        .project-info td.pi-label {
             width: 170px;
             font-weight: bold;
             color: #555;
-            padding-right: 24px;
+            padding-right: 20px;
         }
 
         /* Photos */
-        .photos-table {
+        .photos-tbl {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 0;
         }
 
-        .photos-table td {
+        .photos-tbl td {
             vertical-align: top;
             width: 50%;
+            padding: 0;
         }
 
-        .photos-table td:first-child {
-            padding-right: 8px;
+        .photos-tbl td:first-child {
+            padding-right: 6px;
         }
 
-        .photos-table td:last-child {
-            padding-left: 8px;
+        .photos-tbl td:last-child {
+            padding-left: 6px;
         }
 
-        .photos-table img {
+        .photos-tbl img {
             width: 100%;
-            height: 170px;
-            object-fit: cover;
-            display: block;
-            border-radius: 4px;
+            height: 160px;
         }
 
-        /* Cover footer */
-        .cover-footer-wrap {
-            margin-top: 40px;
-        }
-
-        /* ══ INNER PAGES ══ */
-        .inner-wrap {
-            padding: 36px 48px 40px;
-        }
-
-        /* Inner header */
-        .inner-header-table {
+        /* Page footer row */
+        .pg-footer {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 28px;
+            margin-top: 30px;
+            border-top: 1px solid #e5e5e5;
+            padding-top: 10px;
+        }
+
+        .pg-footer td {
+            font-size: 7.5pt;
+            color: #bbb;
+            vertical-align: middle;
+            padding-top: 10px;
+        }
+
+        .pg-footer .brand {
+            color: #555;
+            font-weight: bold;
+        }
+
+        /* ══════════════════════════════════════
+   INNER PAGES (2-5)
+══════════════════════════════════════ */
+        .inner-top-bar {
+            background-color: #C8102E;
+            height: 6px;
+            width: 100%;
+        }
+
+        .inner-body {
+            padding: 30px 45px 30px 45px;
+        }
+
+        .inner-hdr {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
             border-bottom: 3px solid #1a1a2e;
-            padding-bottom: 14px;
+            padding-bottom: 12px;
         }
 
-        .inner-header-table td {
+        .inner-hdr td {
             vertical-align: bottom;
+            padding-bottom: 12px;
         }
 
-        .inner-logo {
-            height: 36px;
+        .inner-hdr-logo {
+            height: 35px;
             width: auto;
         }
 
-        .inner-page-title {
+        .inner-hdr-title {
             text-align: right;
-            font-size: 14pt;
+            font-size: 15pt;
             font-weight: bold;
             color: #C8102E;
             letter-spacing: -0.3px;
         }
 
-        /* Section heading */
-        .section-heading {
+        /* Section label */
+        .sec-label {
             font-size: 7.5pt;
             font-weight: bold;
             color: #C8102E;
             letter-spacing: 2.5px;
             text-transform: uppercase;
-            margin-bottom: 16px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #e8ebef;
+            margin-bottom: 14px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e8e8e8;
         }
 
-        /* Revision notes */
-        .rn-intro {
+        /* Revision notes page */
+        .rn-intro-text {
             font-size: 10pt;
             color: #555;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
             line-height: 1.7;
         }
 
-        .rn-table {
+        .rn-tbl {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .rn-table td {
-            padding: 12px 0 12px 24px;
-            border-bottom: 1px solid #f0f2f5;
+        .rn-tbl td {
+            padding: 11px 14px;
+            border-bottom: 1px solid #f0f0f0;
             font-size: 10.5pt;
             line-height: 1.7;
             vertical-align: top;
         }
 
-        .rn-table td.rn-bullet {
-            width: 24px;
-            padding: 12px 0 12px 0;
+        .rn-tbl td.rn-dash {
+            width: 28px;
             color: #C8102E;
             font-weight: bold;
             font-size: 12pt;
             text-align: center;
-            vertical-align: top;
+            padding-left: 0;
+            padding-right: 4px;
         }
 
         /* Scope table */
-        .scope-table {
+        .scope-tbl {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .scope-table tr.scope-group-row td {
-            background: #1a1a2e;
-            color: #fff;
+        .scope-tbl tr.sg td {
+            background-color: #1a1a2e;
+            color: #ffffff;
             font-weight: bold;
             font-size: 10.5pt;
-            padding: 10px 16px;
+            padding: 10px 15px;
             letter-spacing: 0.3px;
         }
 
-        .scope-table tr.scope-item-row td {
-            padding: 11px 16px;
-            border-bottom: 1px solid #f0f2f5;
+        .scope-tbl tr.si td {
+            padding: 10px 15px;
+            border-bottom: 1px solid #f0f0f0;
             vertical-align: top;
-            line-height: 1.7;
+            line-height: 1.65;
             font-size: 10pt;
         }
 
-        .scope-table tr.scope-item-row td.scope-name {
+        .scope-tbl tr.si td.sn {
             width: 36%;
             font-weight: bold;
-            color: #1a1a2e;
+            color: #222;
             border-right: 3px solid #C8102E;
-            background: #fafbfc;
+            background-color: #fafafa;
         }
 
         /* Pricing table */
-        .price-table {
+        .price-tbl {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 28px;
+            margin-bottom: 24px;
         }
 
-        .price-table td {
-            padding: 14px 18px;
-            border-bottom: 1px solid #f0f2f5;
+        .price-tbl td {
+            padding: 13px 16px;
+            border-bottom: 1px solid #f0f0f0;
             vertical-align: top;
             font-size: 10.5pt;
-            line-height: 1.7;
+            line-height: 1.65;
         }
 
-        .price-table td.price-label {
+        .price-tbl td.pl {
             width: 180px;
             font-weight: bold;
-            color: #1a1a2e;
-            background: #fafbfc;
-            border-right: 1px solid #f0f2f5;
+            color: #222;
+            background-color: #fafafa;
+            border-right: 1px solid #f0f0f0;
         }
 
-        .price-table tr.price-total-row td {
-            background: #1a1a2e;
-            color: #fff;
+        .price-tbl tr.total-row td {
+            background-color: #1a1a2e;
+            color: #ffffff;
             font-weight: bold;
             font-size: 14pt;
             border-right: none;
-            padding: 18px;
+            padding: 16px 18px;
         }
 
-        .price-table tr.price-total-row td span {
+        .price-tbl tr.total-row td .amount {
             color: #ff6b6b;
             font-size: 18pt;
         }
 
-        /* Signature */
-        .sig-table {
+        /* Signature area */
+        .sig-tbl {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 44px;
+            margin-top: 40px;
         }
 
-        .sig-table td {
+        .sig-tbl td {
             width: 50%;
             vertical-align: top;
             padding: 0;
         }
 
-        .sig-table td:first-child {
-            padding-right: 20px;
+        .sig-tbl td:first-child {
+            padding-right: 18px;
         }
 
-        .sig-table td:last-child {
-            padding-left: 20px;
-            border-left: 1px solid #e8ebef;
+        .sig-tbl td:last-child {
+            padding-left: 18px;
+            border-left: 1px solid #e8e8e8;
         }
 
-        .sig-line-block {
+        .sig-block {
             border-top: 2px solid #1a1a2e;
             padding-top: 10px;
-            margin-top: 50px;
+            margin-top: 48px;
         }
 
-        .sig-lbl {
+        .sig-block-lbl {
             font-size: 8pt;
-            color: #999;
+            color: #aaa;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .sig-nm {
+        .sig-block-name {
             font-size: 11pt;
             font-weight: bold;
             color: #1a1a2e;
             margin-top: 4px;
         }
 
-        /* Project notes */
-        .pn-title-text {
+        /* Project notes page */
+        .pn-title {
             font-size: 18pt;
             font-weight: bold;
             color: #1a1a2e;
+            margin-bottom: 5px;
             letter-spacing: -0.5px;
-            margin-bottom: 6px;
         }
 
-        .pn-title-text span {
+        .pn-title span {
             color: #C8102E;
         }
 
-        .pn-section-title {
+        .pn-divider {
+            border-bottom: 2px solid #f0f0f0;
+            margin: 14px 0 18px 0;
+        }
+
+        .pn-heading {
             font-size: 9.5pt;
             font-weight: bold;
             color: #1a1a2e;
-            margin-top: 20px;
-            margin-bottom: 8px;
-            letter-spacing: 0.2px;
+            margin-top: 18px;
+            margin-bottom: 6px;
             padding-bottom: 4px;
-            border-bottom: 1px solid #f0f2f5;
+            border-bottom: 1px solid #f0f0f0;
         }
 
         .pn-text {
@@ -450,53 +456,31 @@
             line-height: 1.8;
         }
 
-        .pn-item-table {
+        .pn-bullet-tbl {
             width: 100%;
             border-collapse: collapse;
         }
 
-        .pn-item-table td {
-            padding: 4px 0 4px 0;
+        .pn-bullet-tbl td {
+            padding: 3px 0;
             font-size: 9.5pt;
             color: #444;
             line-height: 1.7;
             vertical-align: top;
         }
 
-        .pn-item-table td.pn-bullet {
-            width: 16px;
+        .pn-bullet-tbl td.bullet {
+            width: 14px;
             color: #C8102E;
             font-size: 11pt;
             font-weight: bold;
-            padding-right: 6px;
         }
 
-        /* Page footer */
-        .page-foot-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 36px;
-            padding-top: 14px;
-            border-top: 1px solid #e8ebef;
-        }
-
-        .page-foot-table td {
-            font-size: 7.5pt;
-            color: #b0b7c3;
-            vertical-align: middle;
-        }
-
-        .pf-brand-name {
-            color: #555;
-            font-weight: bold;
-        }
-
-        /* Valid note */
         .valid-note {
             font-size: 8.5pt;
-            color: #b0b7c3;
+            color: #bbb;
             font-style: italic;
-            margin-top: 10px;
+            margin-top: 8px;
         }
     </style>
 </head>
@@ -515,101 +499,87 @@
         $preparedBy = e($quote->prepared_by ?? 'Joanne Fowler');
         $status = e(ucfirst($quote->status ?? 'Quotation'));
 
-        $pricingData = $pricing ?: null;
-        $breakdownHtml = nl2br(e($pricingData['price_breakdown'] ?? ''));
-        $notesHtml = nl2br(e($pricingData['notes'] ?? ''));
-        $exclItems = array_filter(array_map('trim', explode("\n", $pricingData['exclusions'] ?? '')));
+        $p = $pricing ?: null;
+        $breakdownHtml = nl2br(e($p['price_breakdown'] ?? ''));
+        $notesHtml = nl2br(e($p['notes'] ?? ''));
+        $exclItems = array_filter(array_map('trim', explode("\n", $p['exclusions'] ?? '')));
     @endphp
 
-    {{-- ═══════════════════════════════════
-    PAGE 1 — COVER PAGE
-    ═══════════════════════════════════ --}}
-    <div class="accent-bar"></div>
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 1 — COVER ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="cover-top-bar"></div>
+    <div class="cover-body">
 
-    <div class="cover-wrap">
-
-        {{-- Logo row --}}
-        <table class="logo-table">
+        <table class="cover-logo-table">
             <tr>
+                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="cover-logo-img" alt="CC">@endif</td>
                 <td>
-                    @if($logoBase64)
-                        <img src="{{ $logoBase64 }}" class="logo-img" alt="Cheadle Construction">
-                    @endif
-                </td>
-                <td>
-                    <div class="brand-text">Cheadle <span>Construction</span></div>
-                    <div class="brand-sub">Building Excellence &middot; Greater Manchester</div>
+                    <div class="cover-company-name">Cheadle <span>Construction</span></div>
+                    <div class="cover-tagline">Building Excellence &middot; Greater Manchester</div>
                 </td>
             </tr>
         </table>
 
-        {{-- Hero --}}
-        <div class="hero-label">Formal Quotation</div>
-        <div class="hero-title">QUOTATION</div>
-        <div class="hero-ref">Ref: {{ $projectRef }} &nbsp;&middot;&nbsp; {{ $dateFmt }}</div>
+        <div class="cover-title-label">Formal Quotation</div>
+        <div class="cover-title-main">QUOTATION</div>
+        <div class="cover-title-ref">Ref: {{ $projectRef }} &nbsp;&middot;&nbsp; {{ $dateFmt }}</div>
+        <div class="cover-divider"></div>
 
-        <div class="divider"></div>
-
-        {{-- Meta details --}}
-        <table class="meta-table">
+        <table class="meta-grid">
             <tr>
                 <td>
-                    <div class="meta-label">Date</div>
-                    <div class="meta-value">{{ $dateFmt }}</div>
+                    <div class="meta-lbl">Date</div>
+                    <div class="meta-val">{{ $dateFmt }}</div>
                 </td>
-                <td class="right-col">
-                    <div class="meta-label">Reference</div>
-                    <div class="meta-value">{{ $projectRef }}</div>
+                <td class="meta-right">
+                    <div class="meta-lbl">Reference</div>
+                    <div class="meta-val">{{ $projectRef }}</div>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <div class="meta-label">Prepared By</div>
-                    <div class="meta-value">{{ $preparedBy }}</div>
+                    <div class="meta-lbl">Prepared By</div>
+                    <div class="meta-val">{{ $preparedBy }}</div>
                 </td>
-                <td class="right-col">
-                    <div class="meta-label">Status</div>
-                    <div class="meta-value" style="color:#C8102E;">{{ $status }}</div>
+                <td class="meta-right">
+                    <div class="meta-lbl">Status</div>
+                    <div class="meta-val" style="color: #C8102E;">{{ $status }}</div>
                 </td>
             </tr>
         </table>
 
-        {{-- Client --}}
         @if($clientName)
-            <div class="client-block">
-                <div class="client-label">Prepared For</div>
-                <div class="client-name">{{ $clientName }}</div>
+            <div class="client-box">
+                <div class="client-box-lbl">Prepared For</div>
+                <div class="client-box-name">{{ $clientName }}</div>
                 @if($addrHtml)
-                <div class="client-addr">{!! $addrHtml !!}</div>@endif
+                <div class="client-box-addr">{!! $addrHtml !!}</div>@endif
             </div>
         @endif
 
-        {{-- Project details --}}
         @if($projectDesc || $architect)
-            <table class="project-table">
+            <table class="project-info">
                 @if($projectDesc)
                     <tr>
-                        <td class="proj-label">Project</td>
+                        <td class="pi-label">Project</td>
                         <td>{{ $projectDesc }}</td>
                     </tr>
                 @endif
                 <tr>
-                    <td class="proj-label">Architect</td>
+                    <td class="pi-label">Architect</td>
                     <td>{{ $architect }}</td>
                 </tr>
                 <tr>
-                    <td class="proj-label">Structural Engineer</td>
+                    <td class="pi-label">Structural Engineer</td>
                     <td>{{ $structEng }}</td>
                 </tr>
             </table>
         @endif
 
-        {{-- Work photos --}}
         @if(!empty($workPhotos))
-            <table class="photos-table">
+            <table class="photos-tbl">
                 <tr>
                     @foreach(array_slice($workPhotos, 0, 2) as $photo)
-                        <td><img src="{{ $photo }}" alt="Project work"></td>
+                        <td><img src="{{ $photo }}" alt="Work"></td>
                     @endforeach
                     @if(count($workPhotos) === 1)
                     <td></td>@endif
@@ -617,174 +587,161 @@
             </table>
         @endif
 
-        {{-- Page footer --}}
-        <table class="page-foot-table">
+        <table class="pg-footer">
             <tr>
-                <td><span class="pf-brand-name">Cheadle Construction Ltd</span> &middot; Building Excellence, Greater
-                    Manchester</td>
-                <td style="text-align:right;">Page 1 of 5 &nbsp;&middot;&nbsp; {{ $projectRef }}</td>
+                <td><span class="brand">Cheadle Construction Ltd</span> &middot; Building Excellence, Greater Manchester
+                </td>
+                <td style="text-align: right;">Page 1 of 5 &nbsp;&middot;&nbsp; {{ $projectRef }}</td>
             </tr>
         </table>
-
     </div>
 
-    <div class="page-break"></div>
+    <pagebreak />
 
-    {{-- ═══════════════════════════════════
-    PAGE 2 — REVISION NOTES
-    ═══════════════════════════════════ --}}
-    <div class="accent-bar"></div>
-
-    <div class="inner-wrap">
-        <table class="inner-header-table">
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 2 — REVISION NOTES ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="inner-top-bar"></div>
+    <div class="inner-body">
+        <table class="inner-hdr">
             <tr>
-                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-logo" alt="">@else<span
+                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@else<span
                     style="font-size:14pt;font-weight:bold;color:#1a1a2e;">Cheadle <span
                 style="color:#C8102E;">Construction</span></span>@endif</td>
-                <td class="inner-page-title">Scope of Work</td>
+                <td class="inner-hdr-title">Scope of Work</td>
             </tr>
         </table>
 
-        <div class="section-heading">Revision Notes</div>
+        <div class="sec-label">Revision Notes</div>
 
         @if($notes->count())
-            <p class="rn-intro">This quotation has been revised as of <strong style="color:#C8102E;">{{ $dateFmt }}</strong>
-                to include the following changes:</p>
-
-            <table class="rn-table">
+            <p class="rn-intro-text">This quotation has been revised as of <strong
+                    style="color:#C8102E;">{{ $dateFmt }}</strong> to include the following changes:</p>
+            <table class="rn-tbl">
                 @foreach($notes as $n)
                     <tr>
-                        <td class="rn-bullet">&mdash;</td>
+                        <td class="rn-dash">&mdash;</td>
                         <td>{!! $n->is_bold ? '<strong>' . nl2br(e($n->note_text)) . '</strong>' : nl2br(e($n->note_text)) !!}
                         </td>
                     </tr>
                 @endforeach
             </table>
         @else
-            <p style="color:#b0b7c3;font-style:italic;padding:20px 0;">No revision notes added.</p>
+            <p style="color:#bbb;font-style:italic;padding:20px 0;">No revision notes added.</p>
         @endif
 
-        <table class="page-foot-table">
+        <table class="pg-footer">
             <tr>
-                <td><span class="pf-brand-name">Cheadle Construction Ltd</span></td>
-                <td style="text-align:right;">Page 2 of 5</td>
+                <td><span class="brand">Cheadle Construction Ltd</span></td>
+                <td style="text-align: right;">Page 2 of 5</td>
             </tr>
         </table>
     </div>
 
-    <div class="page-break"></div>
+    <pagebreak />
 
-    {{-- ═══════════════════════════════════
-    PAGE 3 — SCOPE & SPECIFICATION
-    ═══════════════════════════════════ --}}
-    <div class="accent-bar"></div>
-
-    <div class="inner-wrap">
-        <table class="inner-header-table">
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 3 — SCOPE & SPECIFICATION ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="inner-top-bar"></div>
+    <div class="inner-body">
+        <table class="inner-hdr">
             <tr>
-                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-logo" alt="">@endif</td>
-                <td class="inner-page-title">Specification</td>
+                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                <td class="inner-hdr-title">Specification</td>
             </tr>
         </table>
 
-        <div class="section-heading">Scope &amp; Specification</div>
+        <div class="sec-label">Scope &amp; Specification</div>
 
         @if($sections->count())
-            <table class="scope-table">
+            <table class="scope-tbl">
                 @foreach($sections as $sec)
                     @if($sec->is_heading)
-                        <tr class="scope-group-row">
+                        <tr class="sg">
                             <td colspan="2">{{ e($sec->section_name) }}</td>
                         </tr>
                     @else
-                        <tr class="scope-item-row">
-                            <td class="scope-name">{{ e($sec->section_name) }}</td>
+                        <tr class="si">
+                            <td class="sn">{{ e($sec->section_name) }}</td>
                             <td>{!! nl2br(e($sec->section_description ?? '')) !!}</td>
                         </tr>
                     @endif
                 @endforeach
             </table>
         @else
-            <p style="color:#b0b7c3;font-style:italic;padding:20px 0;">No scope sections added yet.</p>
+            <p style="color:#bbb;font-style:italic;padding:20px 0;">No scope sections added yet.</p>
         @endif
 
-        <table class="page-foot-table">
+        <table class="pg-footer">
             <tr>
-                <td><span class="pf-brand-name">Cheadle Construction Ltd</span></td>
-                <td style="text-align:right;">Page 3 of 5</td>
+                <td><span class="brand">Cheadle Construction Ltd</span></td>
+                <td style="text-align: right;">Page 3 of 5</td>
             </tr>
         </table>
     </div>
 
-    @if(!empty($pricingData))
-        <div class="page-break"></div>
+    @if(!empty($p))
+        <pagebreak />
 
-        {{-- ═══════════════════════════════════
-        PAGE 4 — PRICING
-        ═══════════════════════════════════ --}}
-        <div class="accent-bar"></div>
-
-        <div class="inner-wrap">
-            <table class="inner-header-table">
+        {{-- ░░░░░░░░░░░░░░░░░░ PAGE 4 — PRICING ░░░░░░░░░░░░░░░░░░ --}}
+        <div class="inner-top-bar"></div>
+        <div class="inner-body">
+            <table class="inner-hdr">
                 <tr>
-                    <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-logo" alt="">@endif</td>
-                    <td class="inner-page-title">Pricing</td>
+                    <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                    <td class="inner-hdr-title">Pricing</td>
                 </tr>
             </table>
 
-            <div class="section-heading">Pricing Summary</div>
-            <div class="divider-red"></div>
+            <div class="sec-label">Pricing Summary</div>
 
-            <table class="price-table">
-                @if(!empty($pricingData['base_cost']))
+            <table class="price-tbl">
+                @if(!empty($p['base_cost']))
                     <tr>
-                        <td class="price-label">Contract Sum</td>
+                        <td class="pl">Contract Sum</td>
                         <td>
                             <strong
-                                style="font-size:12pt;color:#1a1a2e;">&pound;{{ number_format($pricingData['base_cost'], 0) }}</strong>
-                            @if(!empty($pricingData['base_cost_label']))
-                                <br><span style="font-size:9pt;color:#8a92a0;">{{ e($pricingData['base_cost_label']) }}</span>
+                                style="font-size:12pt;color:#1a1a2e;">&pound;{{ number_format($p['base_cost'], 0) }}</strong>
+                            @if(!empty($p['base_cost_label']))
+                                <br><span style="font-size:9pt;color:#888;">{{ e($p['base_cost_label']) }}</span>
                             @endif
                         </td>
                     </tr>
                 @endif
 
-                @if(!empty($pricingData['additional_cost']))
+                @if(!empty($p['additional_cost']))
                     <tr>
-                        <td class="price-label">Additional Works</td>
+                        <td class="pl">Additional Works</td>
                         <td>
                             <strong
-                                style="font-size:12pt;color:#1a1a2e;">&pound;{{ number_format($pricingData['additional_cost'], 0) }}</strong>
-                            @if(!empty($pricingData['additional_cost_label']))
-                                <br><span style="font-size:9pt;color:#8a92a0;">{{ e($pricingData['additional_cost_label']) }}</span>
+                                style="font-size:12pt;color:#1a1a2e;">&pound;{{ number_format($p['additional_cost'], 0) }}</strong>
+                            @if(!empty($p['additional_cost_label']))
+                                <br><span style="font-size:9pt;color:#888;">{{ e($p['additional_cost_label']) }}</span>
                             @endif
                         </td>
                     </tr>
                 @endif
 
-                @if(!empty($pricingData['price_breakdown']))
+                @if(!empty($p['price_breakdown']))
                     <tr>
-                        <td class="price-label">Breakdown</td>
+                        <td class="pl">Breakdown</td>
                         <td>{!! $breakdownHtml !!}</td>
                     </tr>
                 @endif
 
-                @if(!empty($pricingData['notes']))
+                @if(!empty($p['notes']))
                     <tr>
-                        <td class="price-label">Notes</td>
+                        <td class="pl">Notes</td>
                         <td>{!! $notesHtml !!}</td>
                     </tr>
                 @endif
 
                 @if(!empty($exclItems))
                     <tr>
-                        <td class="price-label">Exclusions<br><span style="font-weight:normal;font-size:8pt;color:#b0b7c3;">(not
-                                included in price)</span></td>
+                        <td class="pl">Exclusions<br><span style="font-weight:normal;font-size:8pt;color:#bbb;">(not
+                                included)</span></td>
                         <td>
-                            <table class="pn-item-table">
+                            <table class="pn-bullet-tbl">
                                 @foreach($exclItems as $item)
                                     <tr>
-                                        <td class="pn-bullet">&rsaquo;</td>
+                                        <td class="bullet">&rsaquo;</td>
                                         <td>{{ e($item) }}</td>
                                     </tr>
                                 @endforeach
@@ -793,19 +750,13 @@
                     </tr>
                 @endif
 
-                @if(!empty($pricingData['total_cost']))
-                    <tr class="price-total-row">
-                        <td style="border-right:none;">
-                            TOTAL
-                            @if(!empty($pricingData['total_cost_label']))
-                                <br><small
-                                    style="font-size:8pt;font-weight:normal;opacity:0.7;">{{ e($pricingData['total_cost_label']) }}</small>
-                            @endif
+                @if(!empty($p['total_cost']))
+                    <tr class="total-row">
+                        <td>TOTAL @if(!empty($p['total_cost_label']))<br><small
+                        style="font-size:8pt;font-weight:normal;opacity:0.7;">{{ e($p['total_cost_label']) }}</small>@endif
                         </td>
-                        <td>
-                            <span>&pound;{{ number_format($pricingData['total_cost'], 0) }}</span>
-                            <br><small style="font-size:9pt;font-weight:normal;opacity:0.7;">inc. VAT where applicable</small>
-                        </td>
+                        <td><span class="amount">&pound;{{ number_format($p['total_cost'], 0) }}</span> <small
+                                style="font-size:9pt;font-weight:normal;opacity:0.7;">inc. VAT where applicable</small></td>
                     </tr>
                 @endif
             </table>
@@ -813,61 +764,57 @@
             <p class="valid-note">This quotation is valid for 30 days. A payment schedule and FMB contract will be provided
                 upon acceptance.</p>
 
-            {{-- Signatures --}}
-            <table class="sig-table">
+            <table class="sig-tbl">
                 <tr>
                     <td>
-                        <div class="sig-line-block">
-                            <div class="sig-lbl">Client Signature &amp; Date</div>
-                            <div class="sig-nm">{{ $clientName }}</div>
+                        <div class="sig-block">
+                            <div class="sig-block-lbl">Client Signature &amp; Date</div>
+                            <div class="sig-block-name">{{ $clientName }}</div>
                         </div>
                     </td>
                     <td>
-                        <div class="sig-line-block">
-                            <div class="sig-lbl">Authorised by</div>
-                            <div class="sig-nm">{{ $preparedBy }}<br><span
-                                    style="font-size:8.5pt;font-weight:normal;color:#8a92a0;">Cheadle Construction
-                                    Ltd</span></div>
+                        <div class="sig-block">
+                            <div class="sig-block-lbl">Authorised by</div>
+                            <div class="sig-block-name">{{ $preparedBy }}<br><span
+                                    style="font-size:8.5pt;font-weight:normal;color:#999;">Cheadle Construction Ltd</span>
+                            </div>
                         </div>
                     </td>
                 </tr>
             </table>
 
-            <table class="page-foot-table">
+            <table class="pg-footer">
                 <tr>
-                    <td><span class="pf-brand-name">Cheadle Construction Ltd</span></td>
-                    <td style="text-align:right;">Page 4 of 5</td>
+                    <td><span class="brand">Cheadle Construction Ltd</span></td>
+                    <td style="text-align: right;">Page 4 of 5</td>
                 </tr>
             </table>
         </div>
     @endif
 
-    <div class="page-break"></div>
+    <pagebreak />
 
-    {{-- ═══════════════════════════════════
-    PAGE 5 — PROJECT NOTES
-    ═══════════════════════════════════ --}}
-    <div class="accent-bar"></div>
-
-    <div class="inner-wrap">
-        <table class="inner-header-table">
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 5 — PROJECT NOTES ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="inner-top-bar"></div>
+    <div class="inner-body">
+        <table class="inner-hdr">
             <tr>
-                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-logo" alt="">@endif</td>
-                <td class="inner-page-title">Project Notes</td>
+                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                <td class="inner-hdr-title">Project Notes</td>
             </tr>
         </table>
 
-        <div class="pn-title-text">Cheadle Construction <span>Project Notes</span></div>
-        <div style="height:2px;background:#f0f2f5;margin:14px 0 20px;"></div>
+        <div class="pn-title">Cheadle Construction <span>Project Notes</span></div>
+        <div class="pn-divider"></div>
 
-        <div class="pn-section-title">General Notes &amp; Exclusions</div>
-        <table class="pn-item-table">
+        <div class="pn-heading">General Notes &amp; Exclusions</div>
+        <table class="pn-bullet-tbl">
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>No allowance for floor covering at this stage unless stated otherwise.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>Substructures are based on assumed good ground conditions and are without the benefit of a
                     geological survey. The depths of foundation and design may be subject to change by site conditions
                     and/or on the instruction of Building Control, client&rsquo;s Engineer or Architect. In the event of
@@ -875,64 +822,64 @@
                     re-measurement.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>All waste to be disposed of.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>Structural costs are subject to engineer&rsquo;s design/Calcs if not presented prior to costing.
                 </td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>No allowance for landscaping at this stage but have allowed to infill excavated areas with MOT.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>No allowance for kitchen or utility purchase.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>We have assumed that the existing RCD Board / Consumer Unit is suitable to remain.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>No allowance for Building Control services at this stage but can be arranged at cost.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>External drainage subject to inspection and final layout might differ from drawings.</td>
             </tr>
             <tr>
-                <td class="pn-bullet">&rsaquo;</td>
+                <td class="bullet">&rsaquo;</td>
                 <td>Best endeavours to protect driveways from damage &mdash; we accept no responsibility. Once
                     protection is in place, any concerns please report to a member of staff.</td>
             </tr>
         </table>
 
-        <div class="pn-section-title">Structural Works &mdash; Deflection, Movement and Settlement</div>
+        <div class="pn-heading">Structural Works &mdash; Deflection, Movement and Settlement</div>
         <p class="pn-text">Whilst great care will be taken by our time served tradesmen, a tolerance for deflection,
             movement and settlement is to be expected during and following completion of structural works. This could
             result in settlement cracking to localised areas and damage to decor away from the work area. We will work
             with the client to address these issues at cost in the rare event remedial works are required.</p>
 
-        <div class="pn-section-title">Dust Settlement</div>
+        <div class="pn-heading">Dust Settlement</div>
         <p class="pn-text">Due to the nature of these works there may be residual dust settlement. Whilst we make best
             endeavours to keep the area clean, we cannot guarantee additional cleaning won&rsquo;t be required.</p>
 
-        <div class="pn-section-title">Building Control</div>
+        <div class="pn-heading">Building Control</div>
         <p class="pn-text">These works are notifiable under building control laws. We can handle the application on the
             client&rsquo;s behalf, subject to fee quoted by our provider.</p>
 
-        <div class="pn-section-title">Payments</div>
+        <div class="pn-heading">Payments</div>
         <p class="pn-text">A payment schedule and FMB contract will be provided upon acceptance. Final payment is to be
             made once we reach the final build stage, regardless of any delays outside our control.</p>
 
-        <table class="page-foot-table">
+        <table class="pg-footer">
             <tr>
-                <td><span class="pf-brand-name">Cheadle Construction Ltd</span> &middot; Registered &middot; Insured
-                    &middot; FMB Member &middot; TrustMark Registered</td>
-                <td style="text-align:right;">Page 5 of 5</td>
+                <td><span class="brand">Cheadle Construction Ltd</span> &middot; Registered &middot; Insured &middot;
+                    FMB Member &middot; TrustMark Registered</td>
+                <td style="text-align: right;">Page 5 of 5</td>
             </tr>
         </table>
     </div>

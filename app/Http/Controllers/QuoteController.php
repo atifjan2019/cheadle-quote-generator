@@ -7,7 +7,7 @@ use App\Models\Pricing;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Mpdf\Mpdf;
 
 class QuoteController extends Controller
 {
@@ -216,6 +216,113 @@ class QuoteController extends Controller
     }
 
     /**
+     * Autosave via AJAX — creates or updates, returns JSON.
+     */
+    public function autosave(Request $request)
+    {
+        $id = (int) $request->input('id', 0);
+        $isEdit = $id > 0;
+
+        DB::beginTransaction();
+        try {
+            $data = $request->only([
+                'date',
+                'project_ref',
+                'client_name',
+                'client_address',
+                'project_description',
+                'architect',
+                'structural_engineer',
+                'prepared_by',
+                'status',
+            ]);
+            $data['architect'] = $data['architect'] ?: 'Not yet appointed';
+            $data['structural_engineer'] = $data['structural_engineer'] ?: 'Not yet appointed';
+            $data['prepared_by'] = $data['prepared_by'] ?: 'Joanne Fowler';
+            $data['status'] = in_array($data['status'] ?? '', ['draft', 'sent', 'accepted', 'declined'])
+                ? $data['status'] : 'draft';
+
+            // Need at least a project_ref or client_name to save
+            if (empty($data['project_ref']) && empty($data['client_name'])) {
+                return response()->json(['ok' => false, 'msg' => 'Need ref or name']);
+            }
+            if (empty($data['date'])) {
+                $data['date'] = now()->toDateString();
+            }
+
+            if ($isEdit) {
+                $quote = Quote::findOrFail($id);
+                $quote->update($data);
+            } else {
+                $quote = Quote::create($data);
+            }
+
+            // Revision notes
+            $quote->revisionNotes()->delete();
+            $noteTexts = $request->input('notes', []);
+            $noteBolds = $request->input('notes_bold', []);
+            if (is_array($noteTexts)) {
+                foreach ($noteTexts as $i => $text) {
+                    $text = trim($text);
+                    if ($text === '')
+                        continue;
+                    $quote->revisionNotes()->create([
+                        'note_text' => $text,
+                        'is_bold' => isset($noteBolds[$i]),
+                        'sort_order' => $i,
+                    ]);
+                }
+            }
+
+            // Scope sections
+            $quote->scopeSections()->delete();
+            $secNames = $request->input('sec_name', []);
+            $secDescs = $request->input('sec_desc', []);
+            $secHeadings = $request->input('sec_heading', []);
+            if (is_array($secNames)) {
+                foreach ($secNames as $i => $name) {
+                    $name = trim($name);
+                    if ($name === '')
+                        continue;
+                    $quote->scopeSections()->create([
+                        'section_name' => $name,
+                        'section_description' => trim($secDescs[$i] ?? ''),
+                        'is_heading' => isset($secHeadings[$i]),
+                        'sort_order' => $i,
+                    ]);
+                }
+            }
+
+            // Pricing
+            $pricingData = [
+                'base_cost_label' => trim($request->input('base_cost_label', '')),
+                'base_cost' => $request->input('base_cost') ?: null,
+                'additional_cost_label' => trim($request->input('additional_cost_label', '')),
+                'additional_cost' => $request->input('additional_cost') ?: null,
+                'total_cost' => $request->input('total_cost') ?: null,
+                'total_cost_label' => trim($request->input('total_cost_label', '')),
+                'price_breakdown' => trim($request->input('price_breakdown', '')),
+                'notes' => trim($request->input('notes_pricing', '')),
+                'exclusions' => trim($request->input('exclusions', '')),
+            ];
+            Pricing::updateOrCreate(
+                ['quote_id' => $quote->id],
+                $pricingData
+            );
+
+            DB::commit();
+            return response()->json([
+                'ok' => true,
+                'id' => $quote->id,
+                'msg' => 'Saved',
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return response()->json(['ok' => false, 'msg' => $e->getMessage()], 500);
+        }
+    }
+
+    /**
      * Delete a quote.
      */
     public function destroy(Request $request)
@@ -265,16 +372,32 @@ class QuoteController extends Controller
             }
         }
 
-        $pdf = Pdf::loadView('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos'));
-        $pdf->setPaper('A4', 'portrait');
-        $pdf->setOption('isRemoteEnabled', true);
-        $pdf->setOption('isHtml5ParserEnabled', true);
-        $pdf->setOption('defaultFont', 'Helvetica');
+        // Render the Blade view to HTML
+        $html = view('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos'))->render();
+
+        // Create mPDF instance
+        $mpdf = new Mpdf([
+            'format' => 'A4',
+            'margin_left' => 0,
+            'margin_right' => 0,
+            'margin_top' => 0,
+            'margin_bottom' => 0,
+            'margin_header' => 0,
+            'margin_footer' => 0,
+            'default_font' => 'helvetica',
+            'default_font_size' => 10,
+            'tempDir' => storage_path('app/mpdf'),
+        ]);
+
+        $mpdf->WriteHTML($html);
 
         $ref = preg_replace('/[^A-Za-z0-9\-_]/', '_', $quote->project_ref ?? 'Quote');
         $filename = 'Quote_' . $ref . '_' . date('Ymd') . '.pdf';
 
-        return $pdf->download($filename);
+        return response($mpdf->Output($filename, 'S'), 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
     }
 
     /**
