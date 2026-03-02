@@ -54,11 +54,79 @@ class QuoteController extends Controller
     }
 
     /**
+     * All Quotes listing page with filtering & sorting.
+     */
+    public function list(Request $request)
+    {
+        $query = Quote::leftJoin('pricings', 'pricings.quote_id', '=', 'quotes.id')
+            ->select('quotes.*', 'pricings.total_cost');
+
+        // Status filter
+        $status = $request->query('status', 'all');
+        if ($status !== 'all' && in_array($status, ['draft', 'sent', 'accepted', 'declined'])) {
+            $query->where('quotes.status', $status);
+        }
+
+        // Search
+        $search = $request->query('search', '');
+        if ($search) {
+            $query->where(function ($q) use ($search) {
+                $q->where('quotes.project_ref', 'like', "%{$search}%")
+                    ->orWhere('quotes.client_name', 'like', "%{$search}%")
+                    ->orWhere('quotes.prepared_by', 'like', "%{$search}%");
+            });
+        }
+
+        // Sorting
+        $sort = $request->query('sort', 'newest');
+        switch ($sort) {
+            case 'oldest':
+                $query->orderBy('quotes.created_at', 'asc');
+                break;
+            case 'name_asc':
+                $query->orderBy('quotes.client_name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('quotes.client_name', 'desc');
+                break;
+            case 'value_high':
+                $query->orderByDesc('pricings.total_cost');
+                break;
+            case 'value_low':
+                $query->orderBy('pricings.total_cost', 'asc');
+                break;
+            default:
+                $query->orderByDesc('quotes.created_at');
+        }
+
+        $quotes = $query->get();
+
+        // Stats for filter pills
+        $allCount = Quote::count();
+        $draftCount = Quote::where('status', 'draft')->count();
+        $sentCount = Quote::where('status', 'sent')->count();
+        $acceptedCount = Quote::where('status', 'accepted')->count();
+        $declinedCount = Quote::where('status', 'declined')->count();
+
+        return view('quotes.list', compact(
+            'quotes',
+            'status',
+            'search',
+            'sort',
+            'allCount',
+            'draftCount',
+            'sentCount',
+            'acceptedCount',
+            'declinedCount'
+        ))->with('msg', $request->query('msg'));
+    }
+
+    /**
      * Show the quote create / edit form.
      */
     public function form(Request $request)
     {
-        $id = (int) $request->query('id', 0);
+        $id = (int)$request->query('id', 0);
         $isEdit = $id > 0;
 
         $quote = [];
@@ -113,7 +181,7 @@ class QuoteController extends Controller
             'date' => 'required|date',
         ]);
 
-        $id = (int) $request->input('id', 0);
+        $id = (int)$request->input('id', 0);
         $isEdit = $id > 0;
 
         DB::beginTransaction();
@@ -152,7 +220,8 @@ class QuoteController extends Controller
             if ($isEdit) {
                 $quote = Quote::findOrFail($id);
                 $quote->update($data);
-            } else {
+            }
+            else {
                 $quote = Quote::create($data);
             }
 
@@ -202,14 +271,15 @@ class QuoteController extends Controller
             ];
 
             Pricing::updateOrCreate(
-                ['quote_id' => $quote->id],
+            ['quote_id' => $quote->id],
                 $pricingData
             );
 
             DB::commit();
             return redirect()->route('quotes.index', ['msg' => 'saved']);
 
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             DB::rollBack();
             return back()->withErrors(['error' => 'Error saving quote: ' . $e->getMessage()]);
         }
@@ -220,7 +290,7 @@ class QuoteController extends Controller
      */
     public function autosave(Request $request)
     {
-        $id = (int) $request->input('id', 0);
+        $id = (int)$request->input('id', 0);
         $isEdit = $id > 0;
 
         DB::beginTransaction();
@@ -253,7 +323,8 @@ class QuoteController extends Controller
             if ($isEdit) {
                 $quote = Quote::findOrFail($id);
                 $quote->update($data);
-            } else {
+            }
+            else {
                 $quote = Quote::create($data);
             }
 
@@ -306,7 +377,7 @@ class QuoteController extends Controller
                 'exclusions' => trim($request->input('exclusions', '')),
             ];
             Pricing::updateOrCreate(
-                ['quote_id' => $quote->id],
+            ['quote_id' => $quote->id],
                 $pricingData
             );
 
@@ -316,7 +387,8 @@ class QuoteController extends Controller
                 'id' => $quote->id,
                 'msg' => 'Saved',
             ]);
-        } catch (\Exception $e) {
+        }
+        catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['ok' => false, 'msg' => $e->getMessage()], 500);
         }
@@ -327,7 +399,7 @@ class QuoteController extends Controller
      */
     public function destroy(Request $request)
     {
-        $id = (int) $request->query('id', 0);
+        $id = (int)$request->query('id', 0);
         if ($id > 0) {
             Quote::where('id', $id)->delete();
         }
@@ -339,7 +411,7 @@ class QuoteController extends Controller
      */
     public function generatePdf(Request $request)
     {
-        $id = (int) $request->query('id', 0);
+        $id = (int)$request->query('id', 0);
         if (!$id) {
             abort(404, 'No quote ID specified.');
         }

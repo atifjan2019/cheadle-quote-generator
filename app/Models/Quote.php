@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Quote extends Model
@@ -25,12 +24,12 @@ class Quote extends Model
         'date' => 'date',
     ];
 
-    public function revisionNotes(): HasMany
+    public function revisionNotes()
     {
         return $this->hasMany(RevisionNote::class)->orderBy('sort_order');
     }
 
-    public function scopeSections(): HasMany
+    public function scopeSections()
     {
         return $this->hasMany(ScopeSection::class)->orderBy('sort_order');
     }

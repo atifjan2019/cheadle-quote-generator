@@ -661,8 +661,7 @@
             txt.textContent = 'Unsaved changes';
         }
 
-        document.getElementById('quoteForm').addEventListener('input', function () { markUnsaved(); syncAllFieldsToPreview(); });
-        document.getElementById('quoteForm').addEventListener('change', function () { markUnsaved(); syncAllFieldsToPreview(); });
+        // input/change listeners are attached below with the auto-save logic
         document.getElementById('quoteForm').addEventListener('submit', () => {
             document.getElementById('autosaveDot').className = 'autosave-dot saving';
             document.getElementById('autosaveText').textContent = 'Saving…';
@@ -877,6 +876,149 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        // ── AUTO-SAVE LOGIC ───────────────────────────
+        let autosaveTimer = null;
+        let autosaveQuoteId = {{ $isEdit ? $id : 0 }};
+        let isSaving = false;
+
+        function scheduleAutosave() {
+            if (autosaveTimer) clearTimeout(autosaveTimer);
+            autosaveTimer = setTimeout(doAutosave, 3000);
+        }
+
+        function setAutosaveStatus(state, msg) {
+            const dot = document.getElementById('autosaveDot');
+            const txt = document.getElementById('autosaveText');
+            if (!dot || !txt) return;
+            dot.className = 'autosave-dot ' + state;
+            txt.textContent = msg || '';
+        }
+
+        function collectFormData() {
+            const fd = new FormData();
+            fd.append('_token', document.querySelector('input[name="_token"]').value);
+
+            if (autosaveQuoteId > 0) {
+                fd.append('id', autosaveQuoteId);
+            }
+
+            // Simple fields
+            const fields = ['date', 'project_ref', 'client_name', 'client_address',
+                'project_description', 'architect', 'structural_engineer', 'prepared_by', 'status'];
+            fields.forEach(function (name) {
+                const el = document.getElementById('f_' + name) || document.querySelector('[name="' + name + '"]');
+                if (el) fd.append(name, el.value);
+            });
+
+            // Notes
+            document.querySelectorAll('#notesList .note-row').forEach(function (row, i) {
+                const textEl = row.querySelector('input[type=text]');
+                const boldEl = row.querySelector('input[type=checkbox]');
+                if (textEl) fd.append('notes[' + i + ']', textEl.value);
+                if (boldEl && boldEl.checked) fd.append('notes_bold[' + i + ']', '1');
+            });
+
+            // Scope sections
+            document.querySelectorAll('#scopeBody tr').forEach(function (row, i) {
+                const nameEl = row.querySelector('input.sn');
+                const descEl = row.querySelector('textarea.sd');
+                const headEl = row.querySelector('input[type=checkbox]');
+                if (nameEl) fd.append('sec_name[' + i + ']', nameEl.value);
+                if (descEl) fd.append('sec_desc[' + i + ']', descEl.value);
+                if (headEl && headEl.checked) fd.append('sec_heading[' + i + ']', '1');
+            });
+
+            // Pricing
+            const pricingFields = [
+                'base_cost_label', 'base_cost', 'additional_cost_label', 'additional_cost',
+                'total_cost', 'total_cost_label', 'price_breakdown', 'notes_pricing', 'exclusions'
+            ];
+            pricingFields.forEach(function (name) {
+                const el = document.getElementById('f_' + name);
+                if (el) fd.append(name, el.value);
+            });
+
+            return fd;
+        }
+
+        function doAutosave() {
+            // Need at least a project_ref or client_name
+            const ref = (document.getElementById('f_project_ref') || {}).value || '';
+            const name = (document.getElementById('f_client_name') || {}).value || '';
+            if (!ref.trim() && !name.trim()) {
+                setAutosaveStatus('unsaved', 'Need ref or client name to auto-save');
+                return;
+            }
+
+            if (isSaving) return;
+            isSaving = true;
+
+            setAutosaveStatus('saving', 'Saving…');
+
+            const fd = collectFormData();
+
+            fetch('{{ route("quotes.autosave") }}', {
+                method: 'POST',
+                body: fd,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                isSaving = false;
+                if (data.ok) {
+                    // Store the ID for subsequent saves
+                    if (data.id && autosaveQuoteId === 0) {
+                        autosaveQuoteId = data.id;
+                        // Add hidden input so manual submit also updates correctly
+                        const form = document.getElementById('quoteForm');
+                        let hiddenId = form.querySelector('input[name="id"]');
+                        if (!hiddenId) {
+                            hiddenId = document.createElement('input');
+                            hiddenId.type = 'hidden';
+                            hiddenId.name = 'id';
+                            form.appendChild(hiddenId);
+                        }
+                        hiddenId.value = autosaveQuoteId;
+
+                        // Update browser URL so reload goes to edit mode
+                        const newUrl = '{{ route("quotes.form") }}?id=' + autosaveQuoteId;
+                        window.history.replaceState({}, '', newUrl);
+                    }
+
+                    const now = new Date();
+                    const timeStr = now.getHours().toString().padStart(2, '0') + ':' +
+                                    now.getMinutes().toString().padStart(2, '0') + ':' +
+                                    now.getSeconds().toString().padStart(2, '0');
+                    setAutosaveStatus('', 'Saved at ' + timeStr);
+                } else {
+                    setAutosaveStatus('unsaved', 'Save failed: ' + (data.msg || 'Unknown error'));
+                }
+            })
+            .catch(function (err) {
+                isSaving = false;
+                setAutosaveStatus('unsaved', 'Auto-save error');
+                console.error('Autosave error:', err);
+            });
+        }
+
+        // Wire up form events to trigger auto-save
+        document.getElementById('quoteForm').addEventListener('input', function () {
+            markUnsaved();
+            syncAllFieldsToPreview();
+            scheduleAutosave();
+        });
+        document.getElementById('quoteForm').addEventListener('change', function () {
+            markUnsaved();
+            syncAllFieldsToPreview();
+            scheduleAutosave();
+        });
+
+        // Override the original event listeners (remove duplicates)
+        // The markUnsaved + sync is now handled above, so remove old listeners
+        // by redefining them on DOMContentLoaded
 
         window.addEventListener('DOMContentLoaded', function () {
             syncAllFieldsToPreview();
