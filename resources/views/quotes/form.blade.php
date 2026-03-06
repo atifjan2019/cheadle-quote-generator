@@ -20,39 +20,22 @@
 
     <div class="main builder-main">
 
-        <!-- Topbar -->
-        <div class="topbar" style="flex-shrink:0;">
-            <div class="topbar-search">
-                <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="M21 21l-4.35-4.35" />
-                </svg>
-                <input type="text" id="searchInput"
-                    placeholder="{{ $isEdit ? 'Editing: ' . e($quote->project_ref ?? '') : 'New Quote — fill the form' }}"
-                    disabled style="background:#fafbfc;color:var(--text-muted)">
-            </div>
-            <div class="topbar-icons" style="margin-left:auto;">
-                <a href="{{ route('quotes.index') }}" class="topbar-icon-btn" title="Back to Dashboard">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="17" height="17">
-                        <path d="M19 12H5M12 5l-7 7 7 7" />
-                    </svg>
+        <!-- Breadcrumb bar -->
+        <div class="builder-breadcrumb" style="flex-shrink:0;">
+            <a href="{{ route('quotes.index') }}">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+                Dashboard
+            </a>
+            <span class="breadcrumb-sep">/</span>
+            <a href="{{ route('quotes.list') }}">All Quotes</a>
+            <span class="breadcrumb-sep">/</span>
+            <span class="breadcrumb-current">{{ $isEdit ? e($quote->project_ref ?? 'Edit Quote') : 'New Quote' }}</span>
+            @if($isEdit)
+                <a href="{{ route('quotes.pdf', ['id' => $id]) }}" class="btn btn-outline btn-sm" style="margin-left:auto;" target="_blank">
+                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    Download PDF
                 </a>
-                @if($isEdit)
-                    <a href="{{ route('quotes.pdf', ['id' => $id]) }}" class="topbar-icon-btn" title="Download PDF"
-                        target="_blank" style="color:var(--brand-red);border-color:var(--brand-red);">
-                        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="17" height="17">
-                            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-                        </svg>
-                    </a>
-                @endif
-            </div>
-            <div class="topbar-user">
-                <div class="topbar-avatar">JF</div>
-                <div>
-                    <div class="user-name">Joanne Fowler</div>
-                    <div class="user-role">{{ $isEdit ? 'Editing Quote' : 'New Quote' }}</div>
-                </div>
-            </div>
+            @endif
         </div>
 
         <!-- ══ SPLIT LAYOUT ══════════════════════════ -->

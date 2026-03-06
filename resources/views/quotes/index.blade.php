@@ -10,55 +10,35 @@
 @section('content')
     <main class="main">
 
-        <!-- Topbar -->
-        <div class="topbar">
-            <div class="topbar-search">
-                <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="M21 21l-4.35-4.35" />
-                </svg>
-                <input type="text" id="searchInput" placeholder="Search quotes..." onkeyup="filterTable()">
-                <span class="search-kbd">⌘F</span>
-            </div>
-
-            <div class="topbar-icons">
-                <a href="{{ route('quotes.form') }}" class="topbar-icon-btn" title="New Quote">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M12 5v14M5 12h14" />
-                    </svg>
-                </a>
-                <button class="topbar-icon-btn" title="Notifications" onclick="void(0)">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0" />
-                    </svg>
-                </button>
-            </div>
-
-            <div class="topbar-user">
-                <div class="topbar-avatar">JF</div>
-                <div>
-                    <div class="user-name">Joanne Fowler</div>
-                    <div class="user-role">Cheadle Construction</div>
-                </div>
-            </div>
-        </div>
-
         <!-- Page content -->
         <div class="page-content">
 
             @if($msg === 'saved')
-                <div class="alert alert-success">✅ Quote saved successfully.</div>
+                <div class="alert alert-success" id="flashAlert">
+                    <span>✅ Quote saved successfully.</span>
+                    <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+                </div>
             @elseif($msg === 'deleted')
-                <div class="alert alert-success">🗑️ Quote deleted successfully.</div>
+                <div class="alert alert-success" id="flashAlert">
+                    <span>🗑️ Quote deleted successfully.</span>
+                    <button class="alert-close" onclick="this.parentElement.remove()">✕</button>
+                </div>
             @endif
 
             <!-- Page header -->
             <div class="page-header">
                 <div>
                     <h1>Dashboard</h1>
-                    <p>Manage, generate and track all Cheadle Construction quotes.</p>
+                    <p>Overview of all your quotes and activity.</p>
                 </div>
                 <div class="page-header-actions">
+                    <div class="search-box-inline">
+                        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                        </svg>
+                        <input type="text" id="searchInput" placeholder="Search quotes..." onkeyup="filterTable()">
+                    </div>
                     <a href="{{ route('quotes.form') }}" class="btn btn-primary">
                         <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="15"
                             height="15">
@@ -66,7 +46,6 @@
                         </svg>
                         New Quote
                     </a>
-                    <a href="#all-quotes" class="btn btn-outline">View All</a>
                 </div>
             </div>
 
@@ -75,7 +54,7 @@
                 <div class="stat-card featured">
                     <div class="stat-label">
                         Total Quotes
-                        <a href="{{ route('quotes.form') }}" class="stat-arrow" title="New Quote">
+                        <a href="{{ route('quotes.list') }}" class="stat-arrow" title="View All">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="13"
                                 height="13">
                                 <path d="M7 17L17 7M7 7h10v10" />
@@ -89,56 +68,56 @@
                     </div>
                 </div>
 
-                <div class="stat-card">
+                <a href="{{ route('quotes.list', ['status' => 'draft']) }}" class="stat-card stat-card-link">
                     <div class="stat-label">
                         Drafts
-                        <a href="#all-quotes" class="stat-arrow">
+                        <span class="stat-arrow">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="13"
                                 height="13">
                                 <path d="M7 17L17 7M7 7h10v10" />
                             </svg>
-                        </a>
+                        </span>
                     </div>
                     <div class="stat-value">{{ $draft }}</div>
                     <div class="stat-trend">
                         <span class="trend-icon-wrap" style="background:#f1f5f9;color:#64748b;">≡</span>
                         In progress
                     </div>
-                </div>
+                </a>
 
-                <div class="stat-card">
+                <a href="{{ route('quotes.list', ['status' => 'sent']) }}" class="stat-card stat-card-link">
                     <div class="stat-label">
                         Sent to Client
-                        <a href="#all-quotes" class="stat-arrow">
+                        <span class="stat-arrow">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="13"
                                 height="13">
                                 <path d="M7 17L17 7M7 7h10v10" />
                             </svg>
-                        </a>
+                        </span>
                     </div>
                     <div class="stat-value">{{ $sent }}</div>
                     <div class="stat-trend">
                         <span class="trend-icon-wrap" style="background:#dbeafe;color:#1d4ed8;">→</span>
                         Awaiting response
                     </div>
-                </div>
+                </a>
 
-                <div class="stat-card">
+                <a href="{{ route('quotes.list', ['status' => 'accepted']) }}" class="stat-card stat-card-link">
                     <div class="stat-label">
                         Accepted
-                        <a href="#all-quotes" class="stat-arrow">
+                        <span class="stat-arrow">
                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="13"
                                 height="13">
                                 <path d="M7 17L17 7M7 7h10v10" />
                             </svg>
-                        </a>
+                        </span>
                     </div>
                     <div class="stat-value">{{ $accepted }}</div>
                     <div class="stat-trend">
                         <span class="trend-icon-wrap" style="background:#dcfce7;color:#16a34a;">✓</span>
                         Won projects
                     </div>
-                </div>
+                </a>
             </div>
 
             <!-- Content grid -->
@@ -215,7 +194,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach($quotes as $q)
-                                            <tr>
+                                            <tr class="clickable-row" onclick="window.location='{{ route('quotes.form', ['id' => $q->id]) }}'">
                                                 <td><strong style="color:var(--brand-red);">{{ $q->project_ref }}</strong></td>
                                                 <td>
                                                     <div style="display:flex;align-items:center;gap:8px;">
@@ -233,7 +212,7 @@
                                                 <td><strong>{!! $q->total_cost ? '£' . number_format($q->total_cost, 0) : '<span style="color:var(--text-label)">—</span>' !!}</strong>
                                                 </td>
                                                 <td><span class="badge badge-{{ $q->status }}">{{ ucfirst($q->status) }}</span></td>
-                                                <td>
+                                                <td onclick="event.stopPropagation()">
                                                     <div style="display:flex;gap:6px;">
                                                         <a href="{{ route('quotes.form', ['id' => $q->id]) }}"
                                                             class="btn btn-outline btn-sm btn-icon" title="Edit">
@@ -252,16 +231,16 @@
                                                                     d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
                                                             </svg>
                                                         </a>
-                                                        <a href="{{ route('quotes.delete', ['id' => $q->id]) }}"
+                                                        <button type="button"
                                                             class="btn btn-danger btn-sm btn-icon" title="Delete"
-                                                            onclick="return confirm('Delete this quote? This cannot be undone.')">
+                                                            onclick="confirmDelete('{{ route('quotes.delete', ['id' => $q->id]) }}')">
                                                             <svg fill="none" stroke="currentColor" stroke-width="2"
                                                                 viewBox="0 0 24 24" width="14" height="14">
                                                                 <polyline points="3 6 5 6 21 6" />
                                                                 <path
                                                                     d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6M9 6V4h6v2" />
                                                             </svg>
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </td>
                                             </tr>
@@ -332,7 +311,7 @@
                             @endphp
                             @foreach($statuses as [$s, $label, $count, $bg, $clr])
                                 @php $pct = $total > 0 ? round(($count / $total) * 100) : 0; @endphp
-                                <div>
+                                <a href="{{ route('quotes.list', ['status' => $s]) }}" class="status-bar-link">
                                     <div
                                         style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
                                         <span
@@ -344,7 +323,7 @@
                                             style="height:100%;width:{{ $pct }}%;background:{{ $clr }};border-radius:10px;transition:width 0.6s ease;">
                                         </div>
                                     </div>
-                                </div>
+                                </a>
                             @endforeach
                         </div>
                     </div>
@@ -377,5 +356,15 @@
                 if (current >= target) clearInterval(timer);
             }, 40);
         });
+
+        // Auto-dismiss alerts after 5 seconds
+        const flashAlert = document.getElementById('flashAlert');
+        if (flashAlert) {
+            setTimeout(() => {
+                flashAlert.style.opacity = '0';
+                flashAlert.style.transform = 'translateY(-10px)';
+                setTimeout(() => flashAlert.remove(), 300);
+            }, 5000);
+        }
     </script>
 @endpush

@@ -7,40 +7,6 @@
 @section('content')
     <main class="main">
 
-        <!-- Topbar -->
-        <div class="topbar">
-            <div class="topbar-search">
-                <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <circle cx="11" cy="11" r="8" />
-                    <path d="M21 21l-4.35-4.35" />
-                </svg>
-                <form id="searchForm" action="{{ route('quotes.list') }}" method="GET" style="display:contents;">
-                    <input type="hidden" name="status" value="{{ $status }}">
-                    <input type="hidden" name="sort" value="{{ $sort }}">
-                    <input type="text" id="searchInput" name="search" value="{{ e($search) }}"
-                        placeholder="Search quotes by ref, client, or author..."
-                        onkeydown="if(event.key==='Enter'){this.form.submit();}">
-                </form>
-                <span class="search-kbd">↵</span>
-            </div>
-
-            <div class="topbar-icons">
-                <a href="{{ route('quotes.form') }}" class="topbar-icon-btn" title="New Quote">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                        <path d="M12 5v14M5 12h14" />
-                    </svg>
-                </a>
-            </div>
-
-            <div class="topbar-user">
-                <div class="topbar-avatar">JF</div>
-                <div>
-                    <div class="user-name">Joanne Fowler</div>
-                    <div class="user-role">Cheadle Construction</div>
-                </div>
-            </div>
-        </div>
-
         <!-- Page content -->
         <div class="page-content">
 
@@ -57,6 +23,19 @@
                     <p>Browse, filter and manage every quote created or auto-saved.</p>
                 </div>
                 <div class="page-header-actions">
+                    <div class="search-box-inline">
+                        <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <circle cx="11" cy="11" r="8" />
+                            <path d="M21 21l-4.35-4.35" />
+                        </svg>
+                        <form id="searchForm" action="{{ route('quotes.list') }}" method="GET" style="display:contents;">
+                            <input type="hidden" name="status" value="{{ $status }}">
+                            <input type="hidden" name="sort" value="{{ $sort }}">
+                            <input type="text" id="searchInput" name="search" value="{{ e($search) }}"
+                                placeholder="Search quotes..."
+                                onkeydown="if(event.key==='Enter'){this.form.submit();}">
+                        </form>
+                    </div>
                     <a href="{{ route('quotes.form') }}" class="btn btn-primary">
                         <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" width="15"
                             height="15">
@@ -64,7 +43,6 @@
                         </svg>
                         New Quote
                     </a>
-                    <a href="{{ route('quotes.index') }}" class="btn btn-outline">Dashboard</a>
                 </div>
             </div>
 
@@ -187,7 +165,7 @@
                                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                                             Download PDF
                                         </a>
-                                        <a href="{{ route('quotes.delete', ['id' => $q->id]) }}" class="ql-action-danger" onclick="return confirm('Delete this quote? This cannot be undone.')">
+                                        <a href="#" class="ql-action-danger" onclick="event.preventDefault();confirmDelete('{{ route('quotes.delete', ['id' => $q->id]) }}')">
                                             <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
                                             Delete
                                         </a>
@@ -202,7 +180,7 @@
                                 </div>
                             </div>
                             @if($q->project_description)
-                                <div class="ql-card-desc">{{ Str::limit($q->project_description, 100) }}</div>
+                                <div class="ql-card-desc">{{ \Illuminate\Support\Str::limit($q->project_description, 100) }}</div>
                             @endif
                             <div class="ql-card-footer">
                                 <div class="ql-card-value">
@@ -229,7 +207,7 @@
                                     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                                     PDF
                                 </a>
-                                <a href="{{ route('quotes.delete', ['id' => $q->id]) }}" class="ql-action-btn ql-action-del" onclick="return confirm('Delete this quote?')">
+                                <a href="#" class="ql-action-btn ql-action-del" onclick="event.preventDefault();confirmDelete('{{ route('quotes.delete', ['id' => $q->id]) }}')">
                                     <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
                                 </a>
                             </div>
@@ -281,9 +259,9 @@
                                                     <a href="{{ route('quotes.pdf', ['id' => $q->id]) }}" class="btn btn-primary btn-sm btn-icon" title="Download PDF" target="_blank">
                                                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
                                                     </a>
-                                                    <a href="{{ route('quotes.delete', ['id' => $q->id]) }}" class="btn btn-danger btn-sm btn-icon" title="Delete" onclick="return confirm('Delete this quote? This cannot be undone.')">
+                                                    <button type="button" class="btn btn-danger btn-sm btn-icon" title="Delete" onclick="confirmDelete('{{ route('quotes.delete', ['id' => $q->id]) }}')">
                                                         <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6M10 11v6M14 11v6M9 6V4h6v2"/></svg>
-                                                    </a>
+                                                    </button>
                                                 </div>
                                             </td>
                                         </tr>
