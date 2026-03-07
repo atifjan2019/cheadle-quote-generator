@@ -356,42 +356,44 @@
         }
 
         .price-tbl td {
-            padding: 14px 18px;
+            padding: 12px 16px;
             border-bottom: 1px solid #eee;
             vertical-align: top;
-            font-size: 10.5pt;
-            line-height: 1.65;
+            font-size: 10pt;
+            line-height: 1.7;
         }
 
         .price-tbl td.pl {
-            width: 170px;
+            width: 155px;
             font-weight: 600;
-            color: #1a1a2e;
-            border-left: 3px solid #C8102E;
-            background-color: #fafbfc;
+            color: #555;
+            font-size: 9pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background-color: #fafafa;
         }
 
         .price-tbl tr.total-row td {
-            background: linear-gradient(135deg, #1a1a2e 0%, #2a2a4e 100%);
+            background-color: #1a1a2e;
             color: #ffffff;
             font-weight: bold;
-            font-size: 13pt;
-            border-left: none;
-            padding: 18px 20px;
+            font-size: 12pt;
+            padding: 16px 18px;
             border-bottom: none;
         }
 
         .price-tbl tr.total-row td .amount {
-            color: #ff6b6b;
-            font-size: 20pt;
+            color: #C8102E;
+            font-size: 18pt;
             font-weight: 800;
         }
 
-        .price-divider {
-            width: 100%;
-            height: 1px;
-            background: linear-gradient(90deg, #C8102E, transparent);
-            margin: 24px 0 20px;
+        .valid-note {
+            font-size: 9pt;
+            color: #999;
+            font-style: italic;
+            margin-top: 8px;
+            margin-bottom: 0;
         }
 
         /* Signature area */
@@ -920,16 +922,14 @@
                 </tr>
             </table>
 
-            <div class="sec-label" style="font-size:22pt;font-style:italic;letter-spacing:-0.5px;">Pricing Summary</div>
-            <div style="width:60px;height:3px;background:#C8102E;margin-bottom:20px;"></div>
+            <div class="sec-label">Pricing Summary</div>
 
             <table class="price-tbl">
                 @if(!empty($p['base_cost']))
                     <tr>
                         <td class="pl">Contract Sum</td>
                         <td>
-                            <strong
-                                style="font-size:12pt;color:#1a1a2e;">&pound;{{ number_format($p['base_cost'], 0) }}</strong>
+                            <strong style="font-size:13pt;color:#1a1a2e;">&pound;{{ number_format($p['base_cost'], 0) }}</strong>
                             @if(!empty($p['base_cost_label']))
                                 <br><span style="font-size:9pt;color:#888;">{{ e($p['base_cost_label']) }}</span>
                             @endif
@@ -941,8 +941,7 @@
                     <tr>
                         <td class="pl">Additional Works</td>
                         <td>
-                            <strong
-                                style="font-size:12pt;color:#1a1a2e;">&pound;{{ number_format($p['additional_cost'], 0) }}</strong>
+                            <strong style="font-size:13pt;color:#1a1a2e;">&pound;{{ number_format($p['additional_cost'], 0) }}</strong>
                             @if(!empty($p['additional_cost_label']))
                                 <br><span style="font-size:9pt;color:#888;">{{ e($p['additional_cost_label']) }}</span>
                             @endif
@@ -966,8 +965,7 @@
 
                 @if(!empty($exclItems))
                     <tr>
-                        <td class="pl">Exclusions<br><span style="font-weight:normal;font-size:8pt;color:#bbb;">(not
-                                included)</span></td>
+                        <td class="pl">Exclusions<br><span style="font-weight:normal;font-size:7pt;color:#bbb;text-transform:none;letter-spacing:0;">(not included)</span></td>
                         <td>
                             <table class="pn-bullet-tbl">
                                 @foreach($exclItems as $item)
@@ -992,10 +990,7 @@
                 @endif
             </table>
 
-            <p class="valid-note">This quotation is valid for 30 days. A payment schedule and FMB contract will be provided
-                upon acceptance.</p>
-
-            <div class="price-divider"></div>
+            <p class="valid-note">This quotation is valid for 30 days. A payment schedule and FMB contract will be provided upon acceptance.</p>
 
             <table class="sig-tbl">
                 <tr>

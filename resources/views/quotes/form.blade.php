@@ -575,8 +575,7 @@
                                                 <td class="pdoc-inner-title">Pricing</td>
                                             </tr>
                                         </table>
-                                        <div class="pdoc-sec-heading" style="font-size:16pt;font-style:italic;letter-spacing:-0.5px;">Pricing Summary</div>
-                                        <div style="width:40px;height:2px;background:#C8102E;margin-bottom:14px;"></div>
+                                        <div class="pdoc-sec-heading">Pricing Summary</div>
                                         <table class="pdoc-price-tbl" id="p_pricing_table"></table>
                                         <p class="pdoc-valid-note">This quotation is valid for 30 days. A payment schedule
                                             and FMB contract will be provided upon acceptance.</p>
