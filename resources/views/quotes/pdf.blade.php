@@ -213,9 +213,12 @@
         .pg-footer {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 30px;
             border-top: 1px solid #e5e5e5;
             padding-top: 10px;
+            position: absolute;
+            bottom: 30px;
+            left: 45px;
+            right: 45px;
         }
 
         .pg-footer td {
@@ -241,6 +244,8 @@
 
         .inner-body {
             padding: 30px 45px 30px 45px;
+            position: relative;
+            min-height: calc(297mm - 6px);
         }
 
         .inner-hdr {
