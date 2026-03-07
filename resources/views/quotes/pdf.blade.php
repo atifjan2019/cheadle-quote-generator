@@ -501,6 +501,91 @@
             width: auto;
             height: auto;
         }
+
+        /* Who We Are page */
+        .wwa-title {
+            font-size: 26pt;
+            font-weight: bold;
+            color: #1a1a2e;
+            text-align: center;
+            margin-bottom: 28px;
+            font-style: italic;
+        }
+
+        .wwa-text {
+            font-size: 10.5pt;
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 14px;
+        }
+
+        .wwa-logos {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+
+        .wwa-logos td {
+            width: 50%;
+            text-align: center;
+            vertical-align: middle;
+            padding: 10px 20px;
+        }
+
+        .wwa-logos img {
+            max-height: 100px;
+            width: auto;
+        }
+
+        /* What We Do page */
+        .wwd-title {
+            font-size: 26pt;
+            font-weight: bold;
+            color: #1a1a2e;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .wwd-layout {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .wwd-layout td {
+            vertical-align: top;
+        }
+
+        .wwd-list-col {
+            width: 55%;
+            padding-right: 14px;
+        }
+
+        .wwd-photos-col {
+            width: 45%;
+            padding-left: 6px;
+        }
+
+        .wwd-item {
+            font-size: 10pt;
+            font-weight: bold;
+            color: #222;
+            padding: 3px 0;
+            line-height: 1.5;
+        }
+
+        .wwd-check {
+            color: #C8102E;
+            font-weight: bold;
+            margin-right: 6px;
+        }
+
+        .wwd-photo {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            object-fit: cover;
+        }
     </style>
 </head>
 
@@ -610,7 +695,7 @@
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span> &middot; Building Excellence, Greater Manchester
                 </td>
-                <td style="text-align: right;">Page 1 of 7 &nbsp;&middot;&nbsp; {{ $projectRef }}</td>
+                <td style="text-align: right;">Page 1 of 9 &nbsp;&middot;&nbsp; {{ $projectRef }}</td>
             </tr>
         </table>
     </div>
@@ -650,7 +735,7 @@
         <table class="pg-footer">
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span></td>
-                <td style="text-align: right;">Page 2 of 7</td>
+                <td style="text-align: right;">Page 2 of 9</td>
             </tr>
         </table>
     </div>
@@ -691,7 +776,95 @@
         <table class="pg-footer">
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span></td>
-                <td style="text-align: right;">Page 3 of 7</td>
+                <td style="text-align: right;">Page 3 of 9</td>
+            </tr>
+        </table>
+    </div>
+
+    <pagebreak />
+
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 4 — WHO WE ARE ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="inner-top-bar"></div>
+    <div class="inner-body">
+        <table class="inner-hdr">
+            <tr>
+                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                <td class="inner-hdr-title">About Us</td>
+            </tr>
+        </table>
+
+        <div class="wwa-title">Who we are&hellip;</div>
+
+        <p class="wwa-text">We have created this package with the aim to give our customers an overview of our business and to give you the confidence and security of knowing you have made the right choice by employing Cheadle Construction to undertake your project.</p>
+
+        <p class="wwa-text">We would advise all our potential customers to look at our google business page to see what our customers say about us and visit our Instagram page to view on-site videos at @cheadle_construction. It is also possible to arrange visits to previous project comparable with your own to see first-hand our standard of workmanship.</p>
+
+        <p class="wwa-text">Cheadle Construction Ltd are a well-established professional company with over 25 years&rsquo; experience in the domestic and commercial building industry.</p>
+
+        <p class="wwa-text">We have a close team of professional and reliable tradesmen, all with the relevant qualifications or time served within the industry. We want all our customers to be completely reassured that all our building work is carried out to the highest standards.</p>
+
+        <p class="wwa-text">Services we offer include building refurbishments, home extensions, loft conversions, damp coursing and basement conversions. Our projects are completed in a timely fashion working towards a pre-arranged budget.</p>
+
+        <p class="wwa-text">Cheadle Construction LTD is a fully insured VAT registered company. We are also a member of &lsquo;The Federation of Master builders&rsquo; Trade association and would urge all our customers to visit their website. To qualify to become a member companies must be inspected once a year and provide proof of good working practices.</p>
+
+        <table class="wwa-logos">
+            <tr>
+                <td><img src="{{ asset('assets/img/trustmark-logo.png') }}" alt="TrustMark"></td>
+                <td><img src="{{ asset('assets/img/fmb-logo.png') }}" alt="Federation of Master Builders"></td>
+            </tr>
+        </table>
+
+        <table class="pg-footer">
+            <tr>
+                <td><span class="brand">Cheadle Construction Ltd</span></td>
+                <td style="text-align: right;">Page 4 of 9</td>
+            </tr>
+        </table>
+    </div>
+
+    <pagebreak />
+
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 5 — WHAT WE DO ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="inner-top-bar"></div>
+    <div class="inner-body">
+        <table class="inner-hdr">
+            <tr>
+                <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                <td class="inner-hdr-title">Our Services</td>
+            </tr>
+        </table>
+
+        <div class="wwd-title">What we do&hellip;</div>
+
+        <table class="wwd-layout">
+            <tr>
+                <td class="wwd-list-col">
+                    @php
+                        $services = [
+                            'Design & Build', 'Extensions', 'Loft Conversions', 'Basement Conversions',
+                            'Garage Conversions', 'General Building', 'Structural Works', 'Renovations',
+                            'Kitchens', 'Bathrooms', 'Plumbing', 'Heating',
+                            'Electrical', 'Roofing', 'Damp Proofing', 'Maintenance',
+                            'Repairs', 'Design Services', 'Locks', 'Painting & Decorating',
+                            'Floor Laying', 'Tiling', 'Project Management', 'Landscaping',
+                            'Underfloor Heating', 'Facias & Soffits', 'Windows and Door'
+                        ];
+                    @endphp
+                    @foreach($services as $svc)
+                        <div class="wwd-item"><span class="wwd-check">&check;</span> {{ $svc }}</div>
+                    @endforeach
+                </td>
+                <td class="wwd-photos-col">
+                    <img src="{{ asset('assets/img/wwd-photo-1.png') }}" class="wwd-photo" alt="Extension project">
+                    <img src="{{ asset('assets/img/wwd-photo-2.png') }}" class="wwd-photo" alt="Kitchen renovation">
+                </td>
+            </tr>
+        </table>
+
+        <table class="pg-footer">
+            <tr>
+                <td><span class="brand">Cheadle Construction Ltd</span></td>
+                <td style="text-align: right;">Page 5 of 9</td>
             </tr>
         </table>
     </div>
@@ -699,7 +872,7 @@
     @if(!empty($p))
         <pagebreak />
 
-        {{-- ░░░░░░░░░░░░░░░░░░ PAGE 4 — PRICING ░░░░░░░░░░░░░░░░░░ --}}
+        {{-- ░░░░░░░░░░░░░░░░░░ PAGE 6 — PRICING ░░░░░░░░░░░░░░░░░░ --}}
         <div class="inner-top-bar"></div>
         <div class="inner-body">
             <table class="inner-hdr">
@@ -805,7 +978,7 @@
             <table class="pg-footer">
                 <tr>
                     <td><span class="brand">Cheadle Construction Ltd</span></td>
-                    <td style="text-align: right;">Page 4 of 7</td>
+                    <td style="text-align: right;">Page 6 of 9</td>
                 </tr>
             </table>
         </div>
@@ -813,7 +986,7 @@
 
     <pagebreak />
 
-    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 5 — FMB CERTIFICATE 1 ░░░░░░░░░░░░░░░░░░ --}}
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 7 — FMB CERTIFICATE 1 ░░░░░░░░░░░░░░░░░░ --}}
     <div class="fmb-page">
         <div class="inner-top-bar"></div>
         <div class="fmb-body">
@@ -831,7 +1004,7 @@
             <table class="pg-footer">
                 <tr>
                     <td><span class="brand">Cheadle Construction Ltd</span></td>
-                    <td style="text-align: right;">Page 5 of 7</td>
+                    <td style="text-align: right;">Page 7 of 9</td>
                 </tr>
             </table>
         </div>
@@ -839,7 +1012,7 @@
 
     <pagebreak />
 
-    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 6 — FMB CERTIFICATE 2 ░░░░░░░░░░░░░░░░░░ --}}
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 8 — FMB CERTIFICATE 2 ░░░░░░░░░░░░░░░░░░ --}}
     <div class="fmb-page">
         <div class="inner-top-bar"></div>
         <div class="fmb-body">
@@ -857,7 +1030,7 @@
             <table class="pg-footer">
                 <tr>
                     <td><span class="brand">Cheadle Construction Ltd</span></td>
-                    <td style="text-align: right;">Page 6 of 7</td>
+                    <td style="text-align: right;">Page 8 of 9</td>
                 </tr>
             </table>
         </div>
@@ -865,7 +1038,7 @@
 
     <pagebreak />
 
-    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 7 — PROJECT NOTES ░░░░░░░░░░░░░░░░░░ --}}
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 9 — PROJECT NOTES ░░░░░░░░░░░░░░░░░░ --}}
     <div class="inner-top-bar"></div>
     <div class="inner-body">
         <table class="inner-hdr">
@@ -963,7 +1136,7 @@
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span> &middot; Registered &middot; Insured &middot;
                     FMB Member &middot; TrustMark Registered</td>
-                <td style="text-align: right;">Page 7 of 7</td>
+                <td style="text-align: right;">Page 9 of 9</td>
             </tr>
         </table>
     </div>

@@ -451,7 +451,7 @@
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong> &middot; Building Excellence,
                                                     Greater Manchester</td>
-                                                <td style="text-align:right;">Page 1 of 7 &nbsp;&middot;&nbsp; <span
+                                                <td style="text-align:right;">Page 1 of 9 &nbsp;&middot;&nbsp; <span
                                                         id="p_ref_foot1">{{ e($quote['project_ref'] ?? '') }}</span></td>
                                             </tr>
                                         </table>
@@ -477,7 +477,7 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:40px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 2 of 7</td>
+                                                <td style="text-align:right;">Page 2 of 9</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -499,13 +499,72 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 3 of 7</td>
+                                                <td style="text-align:right;">Page 3 of 9</td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- PAGE 4: PRICING -->
+                                <!-- PAGE 4: WHO WE ARE -->
+                                <div class="pdoc-page">
+                                    <div class="pdoc-accent-bar"></div>
+                                    <div class="pdoc-inner-page">
+                                        <table class="pdoc-inner-header">
+                                            <tr>
+                                                <td><img src="{{ asset('assets/img/logo.png') }}" class="pdoc-inner-logo" alt=""></td>
+                                                <td class="pdoc-inner-title">About Us</td>
+                                            </tr>
+                                        </table>
+                                        <div style="font-size:18pt;font-weight:bold;color:#1a1a2e;text-align:center;margin:16px 0;font-style:italic;">Who we are&hellip;</div>
+                                        <p style="font-size:8pt;color:#444;line-height:1.7;margin-bottom:8px;">We have created this package with the aim to give our customers an overview of our business and to give you the confidence and security of knowing you have made the right choice by employing Cheadle Construction to undertake your project.</p>
+                                        <p style="font-size:8pt;color:#444;line-height:1.7;margin-bottom:8px;">Cheadle Construction Ltd are a well-established professional company with over 25 years' experience in the domestic and commercial building industry.</p>
+                                        <p style="font-size:8pt;color:#444;line-height:1.7;margin-bottom:8px;">We have a close team of professional and reliable tradesmen, all with the relevant qualifications or time served within the industry.</p>
+                                        <p style="font-size:8pt;color:#444;line-height:1.7;margin-bottom:8px;">Services we offer include building refurbishments, home extensions, loft conversions, damp coursing and basement conversions.</p>
+                                        <p style="font-size:8pt;color:#444;line-height:1.7;margin-bottom:8px;">Cheadle Construction LTD is a fully insured VAT registered company. We are also a member of 'The Federation of Master builders' Trade association.</p>
+                                        <div style="display:flex;justify-content:center;gap:20px;margin-top:14px;">
+                                            <img src="{{ asset('assets/img/trustmark-logo.png') }}" style="max-height:50px;width:auto;" alt="TrustMark">
+                                            <img src="{{ asset('assets/img/fmb-logo.png') }}" style="max-height:50px;width:auto;" alt="FMB">
+                                        </div>
+                                        <table class="pdoc-foot-tbl" style="margin-top:20px;">
+                                            <tr>
+                                                <td><strong>Cheadle Construction Ltd</strong></td>
+                                                <td style="text-align:right;">Page 4 of 9</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- PAGE 5: WHAT WE DO -->
+                                <div class="pdoc-page">
+                                    <div class="pdoc-accent-bar"></div>
+                                    <div class="pdoc-inner-page">
+                                        <table class="pdoc-inner-header">
+                                            <tr>
+                                                <td><img src="{{ asset('assets/img/logo.png') }}" class="pdoc-inner-logo" alt=""></td>
+                                                <td class="pdoc-inner-title">Our Services</td>
+                                            </tr>
+                                        </table>
+                                        <div style="font-size:18pt;font-weight:bold;color:#1a1a2e;font-style:italic;margin-bottom:12px;">What we do&hellip;</div>
+                                        <div style="display:flex;gap:12px;">
+                                            <div style="flex:1;font-size:7.5pt;font-weight:bold;line-height:1.7;">
+                                                @php $services = ['Design & Build','Extensions','Loft Conversions','Basement Conversions','Garage Conversions','General Building','Structural Works','Renovations','Kitchens','Bathrooms','Plumbing','Heating','Electrical','Roofing','Damp Proofing','Maintenance','Repairs','Design Services','Locks','Painting & Decorating','Floor Laying','Tiling','Project Management','Landscaping','Underfloor Heating','Facias & Soffits','Windows and Door']; @endphp
+                                                @foreach($services as $svc)<div><span style="color:#C8102E;">&#10003;</span> {{ $svc }}</div>@endforeach
+                                            </div>
+                                            <div style="flex:0.9;">
+                                                <img src="{{ asset('assets/img/wwd-photo-1.png') }}" style="width:100%;border-radius:4px;margin-bottom:6px;" alt="Extension">
+                                                <img src="{{ asset('assets/img/wwd-photo-2.png') }}" style="width:100%;border-radius:4px;" alt="Kitchen">
+                                            </div>
+                                        </div>
+                                        <table class="pdoc-foot-tbl" style="margin-top:16px;">
+                                            <tr>
+                                                <td><strong>Cheadle Construction Ltd</strong></td>
+                                                <td style="text-align:right;">Page 5 of 9</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- PAGE 6: PRICING -->
                                 <div class="pdoc-page" id="p_pricing_page">
                                     <div class="pdoc-accent-bar"></div>
                                     <div class="pdoc-inner-page">
@@ -543,13 +602,13 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 4 of 7</td>
+                                                <td style="text-align:right;">Page 6 of 9</td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- PAGE 5: FMB CERTIFICATE 1 -->
+                                <!-- PAGE 7: FMB CERTIFICATE 1 -->
                                 <div class="pdoc-page">
                                     <div class="pdoc-accent-bar"></div>
                                     <div class="pdoc-inner-page">
@@ -565,13 +624,13 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 5 of 7</td>
+                                                <td style="text-align:right;">Page 7 of 9</td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- PAGE 6: FMB CERTIFICATE 2 -->
+                                <!-- PAGE 8: FMB CERTIFICATE 2 -->
                                 <div class="pdoc-page">
                                     <div class="pdoc-accent-bar"></div>
                                     <div class="pdoc-inner-page">
@@ -587,13 +646,13 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 6 of 7</td>
+                                                <td style="text-align:right;">Page 8 of 9</td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- PAGE 7: PROJECT NOTES -->
+                                <!-- PAGE 9: PROJECT NOTES -->
                                 <div class="pdoc-page">
                                     <div class="pdoc-accent-bar"></div>
                                     <div class="pdoc-inner-page">
@@ -657,7 +716,7 @@
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong> &middot; Registered &middot;
                                                     Insured &middot; FMB Member &middot; TrustMark Registered</td>
-                                                <td style="text-align:right;">Page 7 of 7</td>
+                                                <td style="text-align:right;">Page 9 of 9</td>
                                             </tr>
                                         </table>
                                     </div>
