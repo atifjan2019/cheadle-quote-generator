@@ -1264,7 +1264,7 @@ table tr:hover td {
 
 .scope-card:hover {
     border-color: #c8d0da;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .scope-card-fields {
@@ -1354,14 +1354,14 @@ table tr:hover td {
     background: #fff;
     border-radius: 50%;
     transition: transform 0.25s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
 }
 
-.scope-toggle input:checked + .scope-toggle-slider {
+.scope-toggle input:checked+.scope-toggle-slider {
     background: var(--brand-red);
 }
 
-.scope-toggle input:checked + .scope-toggle-slider::after {
+.scope-toggle input:checked+.scope-toggle-slider::after {
     transform: translateX(16px);
 }
 
@@ -1373,7 +1373,7 @@ table tr:hover td {
     letter-spacing: 0.04em;
 }
 
-.scope-toggle input:checked ~ .scope-toggle-label {
+.scope-toggle input:checked~.scope-toggle-label {
     color: var(--brand-red);
 }
 
@@ -2311,6 +2311,9 @@ table.prev-pricing td.pp-label {
     padding: 24px 32px 32px;
     word-wrap: break-word;
     overflow-wrap: break-word;
+    display: flex;
+    flex-direction: column;
+    min-height: calc(842px - 5px);
 }
 
 .pdoc-inner-header {
@@ -2542,6 +2545,7 @@ table.prev-pricing td.pp-label {
     border-collapse: collapse;
     border-top: 1px solid #e0e0e0;
     padding-top: 10px;
+    margin-top: auto;
 }
 
 .pdoc-foot-tbl td {
