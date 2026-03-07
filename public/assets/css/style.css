@@ -2308,12 +2308,9 @@ table.prev-pricing td.pp-label {
 
 /* ── INNER PAGES ─────────────────────────────── */
 .pdoc-inner-page {
-    padding: 24px 32px 32px;
+    padding: 24px 32px 60px;
     word-wrap: break-word;
     overflow-wrap: break-word;
-    display: flex;
-    flex-direction: column;
-    min-height: calc(842px - 5px);
 }
 
 .pdoc-inner-header {
@@ -2541,11 +2538,14 @@ table.prev-pricing td.pp-label {
 
 /* Shared footer table */
 .pdoc-foot-tbl {
-    width: 100%;
+    width: calc(100% - 64px);
     border-collapse: collapse;
     border-top: 1px solid #e0e0e0;
     padding-top: 10px;
-    margin-top: auto;
+    position: absolute;
+    bottom: 20px;
+    left: 32px;
+    right: 32px;
 }
 
 .pdoc-foot-tbl td {
