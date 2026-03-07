@@ -495,6 +495,7 @@ class QuoteController extends Controller
         $html = view('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos', 'fmbCert1Base64', 'fmbCert2Base64', 'trustmarkBase64', 'fmbLogoBase64', 'wwdPhoto1Base64', 'wwdPhoto2Base64'))->render();
 
         // Create mPDF instance
+        $fontDir = storage_path('fonts');
         $mpdf = new Mpdf([
             'format' => 'A4',
             'margin_left' => 0,
@@ -503,9 +504,24 @@ class QuoteController extends Controller
             'margin_bottom' => 0,
             'margin_header' => 0,
             'margin_footer' => 0,
-            'default_font' => 'helvetica',
+            'default_font' => 'poppins',
             'default_font_size' => 10,
             'tempDir' => storage_path('app/mpdf'),
+            'fontDir' => array_merge(
+            (new \Mpdf\Config\FontVariables())->getDefaults()['fontDir'],
+            [$fontDir]
+        ),
+            'fontdata' => array_merge(
+            (new \Mpdf\Config\FontVariables())->getDefaults()['fontdata'],
+            [
+                'poppins' => [
+                    'R' => 'Poppins-Regular.ttf',
+                    'B' => 'Poppins-Bold.ttf',
+                    'I' => 'Poppins-Italic.ttf',
+                    'BI' => 'Poppins-BoldItalic.ttf',
+                ]
+            ]
+        ),
         ]);
 
         $mpdf->WriteHTML($html);
