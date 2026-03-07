@@ -1659,7 +1659,7 @@ table tr:hover td {
     font-size: 15px;
     font-weight: 800;
     color: #fff;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     line-height: 1.1;
     letter-spacing: 0.2px;
 }
@@ -1673,7 +1673,7 @@ table tr:hover td {
     color: rgba(255, 255, 255, 0.45);
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     margin-top: 2px;
 }
 
@@ -1688,13 +1688,13 @@ table tr:hover td {
     font-weight: 900;
     color: #fff;
     letter-spacing: 0.18em;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
 }
 
 .prev-doc-ref-disp {
     font-size: 9px;
     color: rgba(255, 255, 255, 0.5);
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     margin-top: 3px;
     letter-spacing: 0.04em;
 }
@@ -1735,7 +1735,7 @@ table tr:hover td {
     color: #c8102e;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     margin-bottom: 3px;
 }
 
@@ -1743,7 +1743,7 @@ table tr:hover td {
     font-size: 11px;
     font-weight: 600;
     color: #111;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
 }
 
 /* Client block */
@@ -1761,7 +1761,7 @@ table tr:hover td {
     color: #c8102e;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     margin-bottom: 4px;
 }
 
@@ -1769,13 +1769,13 @@ table tr:hover td {
     font-size: 13px;
     font-weight: 800;
     color: #1a1a2e;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
 }
 
 .prev-client-addr {
     font-size: 10px;
     color: #555;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     white-space: pre-line;
     line-height: 1.5;
     margin-top: 3px;
@@ -1785,7 +1785,7 @@ table tr:hover td {
 .prev-info-table {
     width: 100%;
     border-collapse: collapse;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
 }
 
 .prev-info-table td {
@@ -1806,7 +1806,7 @@ table tr:hover td {
 .prev-section-ribbon {
     background: #1a1a2e;
     color: #fff;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: 0.1em;
@@ -1834,7 +1834,7 @@ table tr:hover td {
 .prev-footer-band {
     background: #1a1a2e;
     color: rgba(255, 255, 255, 0.55);
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     font-size: 8.5px;
     padding: 9px 22px;
     display: flex;
@@ -1948,7 +1948,7 @@ table tr:hover td {
 .prev-doc-title {
     font-size: 18px;
     font-weight: 800;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     color: #000;
     Letter-spacing: 0.5px;
 }
@@ -1972,7 +1972,7 @@ table tr:hover td {
 .prev-field-row {
     margin-bottom: 7px;
     font-size: 10.5px;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     line-height: 1.6;
     color: #222;
 }
@@ -2014,7 +2014,7 @@ table.prev-scope {
     width: 100%;
     border-collapse: collapse;
     font-size: 10px;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
 }
 
 table.prev-scope td {
@@ -2043,7 +2043,7 @@ table.prev-pricing {
     width: 100%;
     border-collapse: collapse;
     font-size: 10.5px;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     margin-top: 8px;
 }
 
@@ -2068,7 +2068,7 @@ table.prev-pricing td.pp-label {
 
 .prev-bullets li {
     font-size: 10.5px;
-    font-family: Arial, sans-serif;
+    font-family: poppins, sans-serif;
     margin-bottom: 6px;
     line-height: 1.5;
 }
@@ -2085,7 +2085,7 @@ table.prev-pricing td.pp-label {
     min-height: 842px;
     box-shadow: 0 4px 28px rgba(0, 0, 0, 0.18);
     margin: 0 auto 28px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: poppins, Helvetica, sans-serif;
     font-size: 10pt;
     color: #1a1a1a;
     line-height: 1.55;

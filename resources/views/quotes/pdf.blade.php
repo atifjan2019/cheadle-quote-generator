@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Helvetica', Arial, sans-serif;
+            font-family: 'Helvetica', poppins, sans-serif;
             color: #222;
             font-size: 10pt;
             line-height: 1.55;
