@@ -2416,35 +2416,39 @@ table.prev-pricing td.pp-label {
 .pdoc-price-tbl {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 }
 
 .pdoc-price-tbl td {
     padding: 10px 14px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid #eee;
     vertical-align: top;
-    font-size: 10pt;
+    font-size: 9pt;
     line-height: 1.65;
 }
 
 .pdoc-price-tbl td.pl {
-    width: 150px;
-    font-weight: bold;
-    color: #333;
-    background: #fafafa;
-    border-right: 1px solid #f0f0f0;
+    width: 130px;
+    font-weight: 600;
+    color: #1a1a2e;
+    background: #fafbfc;
+    border-left: 3px solid #C8102E;
 }
 
 .pdoc-price-tbl tr.total-row td {
-    background: #111 !important;
+    background: linear-gradient(135deg, #1a1a2e 0%, #2a2a4e 100%) !important;
     color: #fff !important;
-    font-size: 12pt !important;
+    font-size: 11pt !important;
     font-weight: bold !important;
-    border-right: none !important;
+    border-left: none !important;
+    border-bottom: none !important;
+    padding: 12px 14px !important;
 }
 
 .pdoc-price-tbl tr.total-row td span {
     color: #ff6b6b;
+    font-size: 14pt;
+    font-weight: 800;
 }
 
 /* Validity note */

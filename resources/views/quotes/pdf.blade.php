@@ -352,44 +352,53 @@
         .price-tbl {
             width: 100%;
             border-collapse: collapse;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
 
         .price-tbl td {
-            padding: 13px 16px;
-            border-bottom: 1px solid #f0f0f0;
+            padding: 14px 18px;
+            border-bottom: 1px solid #eee;
             vertical-align: top;
             font-size: 10.5pt;
             line-height: 1.65;
         }
 
         .price-tbl td.pl {
-            width: 180px;
-            font-weight: bold;
-            color: #222;
-            background-color: #fafafa;
-            border-right: 1px solid #f0f0f0;
+            width: 170px;
+            font-weight: 600;
+            color: #1a1a2e;
+            border-left: 3px solid #C8102E;
+            background-color: #fafbfc;
         }
 
         .price-tbl tr.total-row td {
-            background-color: #1a1a2e;
+            background: linear-gradient(135deg, #1a1a2e 0%, #2a2a4e 100%);
             color: #ffffff;
             font-weight: bold;
-            font-size: 14pt;
-            border-right: none;
-            padding: 16px 18px;
+            font-size: 13pt;
+            border-left: none;
+            padding: 18px 20px;
+            border-bottom: none;
         }
 
         .price-tbl tr.total-row td .amount {
             color: #ff6b6b;
-            font-size: 18pt;
+            font-size: 20pt;
+            font-weight: 800;
+        }
+
+        .price-divider {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #C8102E, transparent);
+            margin: 24px 0 20px;
         }
 
         /* Signature area */
         .sig-tbl {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 40px;
+            margin-top: 32px;
         }
 
         .sig-tbl td {
@@ -399,32 +408,32 @@
         }
 
         .sig-tbl td:first-child {
-            padding-right: 18px;
+            padding-right: 16px;
         }
 
         .sig-tbl td:last-child {
-            padding-left: 18px;
-            border-left: 1px solid #e8e8e8;
+            padding-left: 16px;
         }
 
         .sig-block {
             border-top: 2px solid #1a1a2e;
-            padding-top: 10px;
-            margin-top: 48px;
+            padding-top: 12px;
+            margin-top: 40px;
         }
 
         .sig-block-lbl {
-            font-size: 8pt;
-            color: #aaa;
+            font-size: 7.5pt;
+            color: #999;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
         }
 
         .sig-block-name {
             font-size: 11pt;
             font-weight: bold;
             color: #1a1a2e;
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         /* Project notes page */
@@ -911,7 +920,8 @@
                 </tr>
             </table>
 
-            <div class="sec-label">Pricing Summary</div>
+            <div class="sec-label" style="font-size:22pt;font-style:italic;letter-spacing:-0.5px;">Pricing Summary</div>
+            <div style="width:60px;height:3px;background:#C8102E;margin-bottom:20px;"></div>
 
             <table class="price-tbl">
                 @if(!empty($p['base_cost']))
@@ -984,6 +994,8 @@
 
             <p class="valid-note">This quotation is valid for 30 days. A payment schedule and FMB contract will be provided
                 upon acceptance.</p>
+
+            <div class="price-divider"></div>
 
             <table class="sig-tbl">
                 <tr>
