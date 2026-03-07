@@ -14,7 +14,7 @@
         }
 
         body {
-            font-family: 'Helvetica', poppins, sans-serif;
+            font-family: 'poppins', Helvetica, Arial, sans-serif;
             color: #222;
             font-size: 10pt;
             line-height: 1.55;
@@ -590,7 +590,7 @@
         }
 
         .wwd-item {
-            font-size: 9.5pt;
+            font-size: 14px;
             font-weight: bold;
             color: #222;
             padding: 3px 0;

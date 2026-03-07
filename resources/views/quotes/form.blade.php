@@ -546,7 +546,7 @@
                                         </table>
                                         <div style="font-size:18pt;font-weight:bold;color:#1a1a2e;font-style:italic;margin-bottom:12px;">What we do&hellip;</div>
                                         <div style="display:flex;gap:12px;">
-                                            <div style="flex:1;font-size:7.5pt;font-weight:bold;line-height:1.7;">
+                                            <div style="flex:1;font-size:8pt;font-weight:normal;line-height:1.7;">
                                                 @php $services = ['Design & Build','Extensions','Loft Conversions','Basement Conversions','Garage Conversions','General Building','Structural Works','Renovations','Kitchens','Bathrooms','Plumbing','Heating','Electrical','Roofing','Damp Proofing','Maintenance','Repairs','Design Services','Locks','Painting & Decorating','Floor Laying','Tiling','Project Management','Landscaping','Underfloor Heating','Facias & Soffits','Windows and Door']; @endphp
                                                 @foreach($services as $svc)<div><span style="color:#C8102E;">&#10003;</span> {{ $svc }}</div>@endforeach
                                             </div>
