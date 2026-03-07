@@ -465,8 +465,34 @@ class QuoteController extends Controller
             $fmbCert2Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($fmbCert2Path));
         }
 
+        // TrustMark & FMB logos as base64
+        $trustmarkBase64 = '';
+        $trustmarkPath = public_path('assets/img/trustmark-logo.png');
+        if (file_exists($trustmarkPath)) {
+            $trustmarkBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($trustmarkPath));
+        }
+
+        $fmbLogoBase64 = '';
+        $fmbLogoPath = public_path('assets/img/fmb-logo.png');
+        if (file_exists($fmbLogoPath)) {
+            $fmbLogoBase64 = 'data:image/png;base64,' . base64_encode(file_get_contents($fmbLogoPath));
+        }
+
+        // What We Do project photos as base64
+        $wwdPhoto1Base64 = '';
+        $wwdPhoto1Path = public_path('assets/img/wwd-photo-1.png');
+        if (file_exists($wwdPhoto1Path)) {
+            $wwdPhoto1Base64 = 'data:image/png;base64,' . base64_encode(file_get_contents($wwdPhoto1Path));
+        }
+
+        $wwdPhoto2Base64 = '';
+        $wwdPhoto2Path = public_path('assets/img/wwd-photo-2.png');
+        if (file_exists($wwdPhoto2Path)) {
+            $wwdPhoto2Base64 = 'data:image/png;base64,' . base64_encode(file_get_contents($wwdPhoto2Path));
+        }
+
         // Render the Blade view to HTML
-        $html = view('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos', 'fmbCert1Base64', 'fmbCert2Base64'))->render();
+        $html = view('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos', 'fmbCert1Base64', 'fmbCert2Base64', 'trustmarkBase64', 'fmbLogoBase64', 'wwdPhoto1Base64', 'wwdPhoto2Base64'))->render();
 
         // Create mPDF instance
         $mpdf = new Mpdf([

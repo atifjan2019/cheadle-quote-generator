@@ -504,46 +504,65 @@
 
         /* Who We Are page */
         .wwa-title {
-            font-size: 26pt;
+            font-size: 28pt;
             font-weight: bold;
             color: #1a1a2e;
             text-align: center;
-            margin-bottom: 28px;
+            margin-bottom: 10px;
             font-style: italic;
+            letter-spacing: -0.5px;
+        }
+
+        .wwa-divider {
+            width: 60px;
+            height: 3px;
+            background: #C8102E;
+            margin: 0 auto 24px auto;
         }
 
         .wwa-text {
-            font-size: 10.5pt;
+            font-size: 10pt;
             color: #444;
-            line-height: 1.8;
-            margin-bottom: 14px;
+            line-height: 1.75;
+            margin-bottom: 12px;
+            text-align: justify;
+        }
+
+        .wwa-highlight {
+            border-left: 3px solid #C8102E;
+            padding-left: 14px;
+            margin: 18px 0;
         }
 
         .wwa-logos {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 24px;
+            margin-top: 18px;
+            background: #f8f9fb;
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
         }
 
         .wwa-logos td {
             width: 50%;
             text-align: center;
             vertical-align: middle;
-            padding: 10px 20px;
+            padding: 14px 20px;
         }
 
         .wwa-logos img {
-            max-height: 100px;
+            max-height: 80px;
             width: auto;
         }
 
         /* What We Do page */
         .wwd-title {
-            font-size: 26pt;
+            font-size: 28pt;
             font-weight: bold;
             color: #1a1a2e;
             font-style: italic;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
         }
 
         .wwd-layout {
@@ -556,35 +575,37 @@
         }
 
         .wwd-list-col {
-            width: 55%;
-            padding-right: 14px;
+            width: 52%;
+            padding-right: 12px;
         }
 
         .wwd-photos-col {
-            width: 45%;
-            padding-left: 6px;
+            width: 48%;
+            padding-left: 8px;
         }
 
         .wwd-item {
-            font-size: 10pt;
+            font-size: 9.5pt;
             font-weight: bold;
             color: #222;
             padding: 3px 0;
-            line-height: 1.5;
+            line-height: 1.45;
+            text-decoration: underline;
         }
 
         .wwd-check {
             color: #C8102E;
             font-weight: bold;
-            margin-right: 6px;
+            margin-right: 5px;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .wwd-photo {
             width: 100%;
             height: auto;
-            border-radius: 4px;
+            border-radius: 6px;
             margin-bottom: 10px;
-            object-fit: cover;
         }
     </style>
 </head>
@@ -794,12 +815,15 @@
         </table>
 
         <div class="wwa-title">Who we are&hellip;</div>
+        <div class="wwa-divider"></div>
 
         <p class="wwa-text">We have created this package with the aim to give our customers an overview of our business and to give you the confidence and security of knowing you have made the right choice by employing Cheadle Construction to undertake your project.</p>
 
-        <p class="wwa-text">We would advise all our potential customers to look at our google business page to see what our customers say about us and visit our Instagram page to view on-site videos at @cheadle_construction. It is also possible to arrange visits to previous project comparable with your own to see first-hand our standard of workmanship.</p>
+        <p class="wwa-text">We would advise all our potential customers to look at our google business page to see what our customers say about us and visit our Instagram page to view on-site videos at <strong>@cheadle_construction</strong>. It is also possible to arrange visits to previous project comparable with your own to see first-hand our standard of workmanship.</p>
 
-        <p class="wwa-text">Cheadle Construction Ltd are a well-established professional company with over 25 years&rsquo; experience in the domestic and commercial building industry.</p>
+        <div class="wwa-highlight">
+            <p class="wwa-text" style="margin-bottom:0;">Cheadle Construction Ltd are a well-established professional company with over <strong>25 years&rsquo; experience</strong> in the domestic and commercial building industry.</p>
+        </div>
 
         <p class="wwa-text">We have a close team of professional and reliable tradesmen, all with the relevant qualifications or time served within the industry. We want all our customers to be completely reassured that all our building work is carried out to the highest standards.</p>
 
@@ -809,8 +833,8 @@
 
         <table class="wwa-logos">
             <tr>
-                <td><img src="{{ asset('assets/img/trustmark-logo.png') }}" alt="TrustMark"></td>
-                <td><img src="{{ asset('assets/img/fmb-logo.png') }}" alt="Federation of Master Builders"></td>
+                <td>@if($trustmarkBase64)<img src="{{ $trustmarkBase64 }}" alt="TrustMark">@endif</td>
+                <td>@if($fmbLogoBase64)<img src="{{ $fmbLogoBase64 }}" alt="Federation of Master Builders">@endif</td>
             </tr>
         </table>
 
@@ -855,8 +879,8 @@
                     @endforeach
                 </td>
                 <td class="wwd-photos-col">
-                    <img src="{{ asset('assets/img/wwd-photo-1.png') }}" class="wwd-photo" alt="Extension project">
-                    <img src="{{ asset('assets/img/wwd-photo-2.png') }}" class="wwd-photo" alt="Kitchen renovation">
+                    @if($wwdPhoto1Base64)<img src="{{ $wwdPhoto1Base64 }}" class="wwd-photo" alt="Extension project">@endif
+                    @if($wwdPhoto2Base64)<img src="{{ $wwdPhoto2Base64 }}" class="wwd-photo" alt="Kitchen renovation">@endif
                 </td>
             </tr>
         </table>
