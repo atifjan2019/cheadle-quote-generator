@@ -174,12 +174,12 @@
                         <div class="fs-card">
                             <div class="fs-card-header" onclick="toggleSection(this)">
                                 <h3><span class="sec-icon" style="background:#fef3c7;">🔨</span> Scope of Work</h3>
-                                <svg class="fs-chevron open" fill="none" stroke="currentColor" stroke-width="2.5"
+                                <svg class="fs-chevron" fill="none" stroke="currentColor" stroke-width="2.5"
                                     viewBox="0 0 24 24" width="16" height="16">
                                     <path d="M6 9l6 6 6-6" />
                                 </svg>
                             </div>
-                            <div class="fs-card-body" style="padding:0 16px 14px;">
+                            <div class="fs-card-body collapsed" style="padding:0 16px 14px;">
                                 <p style="font-size:11px;color:var(--text-muted);padding:12px 0 8px;">Quick-add a service
                                     group, or add rows manually below.</p>
                                 <div class="service-groups">
@@ -189,38 +189,34 @@
                                     @endforeach
                                 </div>
 
-                                <div style="overflow-x:auto;">
-                                    <table class="scope-mini-table">
-                                        <thead>
-                                            <tr>
-                                                <th style="width:36%">Section / Trade</th>
-                                                <th>Description</th>
-                                                <th style="width:48px;" title="Show in PDF">👁</th>
-                                                <th style="width:36px;"></th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="scopeBody">
-                                            @foreach($rows as $sec)
-                                                @php
-                                                    $secName = is_array($sec) ? ($sec['section_name'] ?? '') : ($sec->section_name ?? '');
-                                                    $secDesc = is_array($sec) ? ($sec['section_description'] ?? '') : ($sec->section_description ?? '');
-                                                    $secHdg = is_array($sec) ? ($sec['is_heading'] ?? false) : ($sec->is_heading ?? false);
-                                                @endphp
-                                                <tr>
-                                                    <td><input type="text" class="sn" name="sec_name[]"
-                                                            value="{{ e($secName) }}" oninput="renderPreview()"></td>
-                                                    <td><textarea class="sd" name="sec_desc[]"
-                                                            oninput="renderPreview()">{{ e($secDesc) }}</textarea></td>
-                                                    <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="sec_visible[]" value="1" {{ ($isEdit && count($sections)) ? 'checked' : '' }}
-                                                            onchange="renderPreview()" title="Show in PDF"></td>
-                                                    <td><button type="button" class="rm-btn"
-                                                            onclick="this.closest('tr').remove();renderPreview()">✕</button>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                <div class="scope-cards" id="scopeBody">
+                                    @foreach($rows as $sec)
+                                        @php
+                                            $secName = is_array($sec) ? ($sec['section_name'] ?? '') : ($sec->section_name ?? '');
+                                            $secDesc = is_array($sec) ? ($sec['section_description'] ?? '') : ($sec->section_description ?? '');
+                                            $secHdg = is_array($sec) ? ($sec['is_heading'] ?? false) : ($sec->is_heading ?? false);
+                                        @endphp
+                                        <div class="scope-card">
+                                            <div class="scope-card-fields">
+                                                <input type="text" class="sn scope-card-name" name="sec_name[]"
+                                                    value="{{ e($secName) }}" placeholder="Section / Trade name..." oninput="renderPreview()">
+                                                <textarea class="sd scope-card-desc" name="sec_desc[]"
+                                                    placeholder="Description..." oninput="renderPreview()">{{ e($secDesc) }}</textarea>
+                                            </div>
+                                            <div class="scope-card-actions">
+                                                <label class="scope-toggle" title="Show in PDF">
+                                                    <input type="checkbox" name="sec_visible[]" value="1" {{ ($isEdit && count($sections)) ? 'checked' : '' }}
+                                                        onchange="renderPreview()">
+                                                    <span class="scope-toggle-slider"></span>
+                                                    <span class="scope-toggle-label">PDF</span>
+                                                </label>
+                                                <button type="button" class="scope-card-del"
+                                                    onclick="this.closest('.scope-card').remove();renderPreview()" title="Remove">✕</button>
+                                            </div>
+                                        </div>
+                                    @endforeach
                                 </div>
+
                                 <button type="button" class="btn btn-outline btn-sm" style="margin-top:10px;width:100%;"
                                     onclick="addScopeRow()">+ Add Row</button>
                             </div>
@@ -789,20 +785,22 @@
         function renderScopeTable() {
             var tbl = document.getElementById('p_scope_table');
             if (!tbl) return;
-            var rows = document.querySelectorAll('#scopeBody tr');
+            var cards = document.querySelectorAll('#scopeBody .scope-card');
             var html = '';
-            rows.forEach(function (row) {
-                var nameEl = row.querySelector('input.sn');
-                var descEl = row.querySelector('textarea.sd');
-                var visEl = row.querySelector('input[type=checkbox]');
+            cards.forEach(function (card) {
+                var nameEl = card.querySelector('input.sn');
+                var descEl = card.querySelector('textarea.sd');
+                var visEl = card.querySelector('input[type=checkbox]');
                 var name = nameEl ? nameEl.value.trim() : '';
                 var desc = descEl ? descEl.value.trim() : '';
                 var visible = visEl && visEl.checked;
                 if (!name || !visible) return;
+                var safeName = name.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                var safeDesc = desc.replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/\n/g, '<br>');
                 if (!desc) {
-                    html += '<tr class="scope-group"><td colspan="2">' + escHtml(name) + '</td></tr>';
+                    html += '<tr class="scope-group"><td colspan="2">' + safeName + '</td></tr>';
                 } else {
-                    html += '<tr class="scope-row"><td class="scope-label">' + escHtml(name) + '</td><td>' + escHtml(desc).replace(/\n/g, '<br>') + '</td></tr>';
+                    html += '<tr class="scope-row"><td class="scope-label">' + safeName + '</td><td>' + safeDesc + '</td></tr>';
                 }
             });
             tbl.innerHTML = html || '<tr><td colspan="2" style="color:#bbb;padding:12px;text-align:center;font-size:8pt;font-style:italic;">No scope sections added yet.</td></tr>';
@@ -883,13 +881,22 @@
 
         function addScopeRow(name, desc, heading) {
             name = name || ''; desc = desc || ''; heading = !!heading;
-            const tbody = document.getElementById('scopeBody');
-            const tr = document.createElement('tr');
-            tr.innerHTML = '<td><input type="text" class="sn" name="sec_name[]" value="' + escHtml(name) + '" placeholder="Section name..." oninput="renderPreview()"></td>'
-                + '<td><textarea class="sd" name="sec_desc[]" oninput="renderPreview()">' + escHtml(desc) + '</textarea></td>'
-                + '<td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="sec_visible[]" value="1" onchange="renderPreview()" title="Show in PDF"></td>'
-                + '<td><button type="button" class="rm-btn" onclick="this.closest(\'tr\').remove();renderPreview()">\u2715</button></td>';
-            tbody.appendChild(tr);
+            const container = document.getElementById('scopeBody');
+            const card = document.createElement('div');
+            card.className = 'scope-card';
+            card.innerHTML = '<div class="scope-card-fields">'
+                + '<input type="text" class="sn scope-card-name" name="sec_name[]" value="' + escHtml(name) + '" placeholder="Section / Trade name..." oninput="renderPreview()">'
+                + '<textarea class="sd scope-card-desc" name="sec_desc[]" placeholder="Description..." oninput="renderPreview()">' + escHtml(desc) + '</textarea>'
+                + '</div>'
+                + '<div class="scope-card-actions">'
+                + '<label class="scope-toggle" title="Show in PDF">'
+                + '<input type="checkbox" name="sec_visible[]" value="1" onchange="renderPreview()">'
+                + '<span class="scope-toggle-slider"></span>'
+                + '<span class="scope-toggle-label">PDF</span>'
+                + '</label>'
+                + '<button type="button" class="scope-card-del" onclick="this.closest(\'.scope-card\').remove();renderPreview()" title="Remove">\u2715</button>'
+                + '</div>';
+            container.appendChild(card);
             renderPreview();
         }
 
@@ -957,10 +964,10 @@
             });
 
             // Scope sections
-            document.querySelectorAll('#scopeBody tr').forEach(function (row, i) {
-                var nameEl = row.querySelector('input.sn');
-                var descEl = row.querySelector('textarea.sd');
-                var visEl = row.querySelector('input[type=checkbox]');
+            document.querySelectorAll('#scopeBody .scope-card').forEach(function (card, i) {
+                var nameEl = card.querySelector('input.sn');
+                var descEl = card.querySelector('textarea.sd');
+                var visEl = card.querySelector('input[type=checkbox]');
                 if (nameEl) fd.append('sec_name[' + i + ']', nameEl.value);
                 if (descEl) fd.append('sec_desc[' + i + ']', descEl.value);
                 // Auto-detect heading from empty description

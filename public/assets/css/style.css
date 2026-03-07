@@ -1244,74 +1244,157 @@ table tr:hover td {
     min-height: 68px;
 }
 
-/* Scope mini table */
-.scope-mini-table {
-    width: 100%;
-    border-collapse: collapse;
+/* Scope cards — modern card layout */
+.scope-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
 
-.scope-mini-table th {
-    background: var(--brand-navy);
-    color: #fff;
-    padding: 8px 9px;
-    text-align: left;
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-}
-
-.scope-mini-table td {
-    padding: 6px 6px;
-    border-bottom: 1px solid var(--border);
-    vertical-align: top;
-}
-
-.scope-mini-table input.sn {
-    width: 100%;
-    padding: 5px 7px;
+.scope-card {
+    background: #fff;
     border: 1.5px solid var(--border);
-    border-radius: 5px;
-    font-size: 11.5px;
+    border-radius: 10px;
+    padding: 12px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.scope-card:hover {
+    border-color: #c8d0da;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.scope-card-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.scope-card-name {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
     font-weight: 600;
     color: var(--brand-red);
-    background: #fff;
+    background: #fafbfc;
     font-family: 'Inter', sans-serif;
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.scope-mini-table input.sn:focus {
+.scope-card-name:focus {
     border-color: var(--brand-red);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.08);
+    background: #fff;
 }
 
-.scope-mini-table textarea.sd {
+.scope-card-desc {
     width: 100%;
-    padding: 5px 7px;
+    padding: 9px 12px;
     border: 1.5px solid var(--border);
-    border-radius: 5px;
-    font-size: 11.5px;
+    border-radius: 8px;
+    font-size: 12.5px;
     font-family: 'Inter', sans-serif;
     resize: vertical;
-    min-height: 46px;
+    min-height: 56px;
+    color: var(--text-main);
+    transition: border-color 0.2s, box-shadow 0.2s;
 }
 
-.scope-mini-table textarea.sd:focus {
+.scope-card-desc:focus {
     border-color: var(--brand-red);
     outline: none;
+    box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.08);
 }
 
-.scope-mini-table .rm-btn {
+.scope-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding-top: 4px;
+    border-top: 1px solid #f1f5f9;
+}
+
+/* Toggle switch */
+.scope-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.scope-toggle input[type="checkbox"] {
+    display: none;
+}
+
+.scope-toggle-slider {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: #d1d5db;
+    border-radius: 20px;
+    transition: background 0.25s;
+    flex-shrink: 0;
+}
+
+.scope-toggle-slider::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.scope-toggle input:checked + .scope-toggle-slider {
+    background: var(--brand-red);
+}
+
+.scope-toggle input:checked + .scope-toggle-slider::after {
+    transform: translateX(16px);
+}
+
+.scope-toggle-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.scope-toggle input:checked ~ .scope-toggle-label {
+    color: var(--brand-red);
+}
+
+/* Delete button */
+.scope-card-del {
     cursor: pointer;
     background: #fee2e2;
     border: none;
-    border-radius: 5px;
-    padding: 4px 7px;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #dc2626;
-    font-size: 12px;
+    font-size: 14px;
     transition: background 0.2s;
+    flex-shrink: 0;
 }
 
-.scope-mini-table .rm-btn:hover {
+.scope-card-del:hover {
     background: #fecaca;
 }
 
