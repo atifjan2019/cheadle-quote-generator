@@ -244,15 +244,19 @@ class QuoteController extends Controller
             $quote->scopeSections()->delete();
             $secNames = $request->input('sec_name', []);
             $secDescs = $request->input('sec_desc', []);
-            $secHeadings = $request->input('sec_heading', []);
+            $secVisible = $request->input('sec_visible', []);
             foreach ($secNames as $i => $name) {
                 $name = trim($name);
                 if ($name === '')
                     continue;
+                // Only save items that are visible (checked)
+                if (!isset($secVisible[$i]))
+                    continue;
+                $desc = trim($secDescs[$i] ?? '');
                 $quote->scopeSections()->create([
                     'section_name' => $name,
-                    'section_description' => trim($secDescs[$i] ?? ''),
-                    'is_heading' => isset($secHeadings[$i]) ? true : false,
+                    'section_description' => $desc,
+                    'is_heading' => $desc === '' ? true : false,
                     'sort_order' => $i,
                 ]);
             }
@@ -349,16 +353,20 @@ class QuoteController extends Controller
             $quote->scopeSections()->delete();
             $secNames = $request->input('sec_name', []);
             $secDescs = $request->input('sec_desc', []);
-            $secHeadings = $request->input('sec_heading', []);
+            $secVisible = $request->input('sec_visible', []);
             if (is_array($secNames)) {
                 foreach ($secNames as $i => $name) {
                     $name = trim($name);
                     if ($name === '')
                         continue;
+                    // Only save items that are visible (checked)
+                    if (!isset($secVisible[$i]))
+                        continue;
+                    $desc = trim($secDescs[$i] ?? '');
                     $quote->scopeSections()->create([
                         'section_name' => $name,
-                        'section_description' => trim($secDescs[$i] ?? ''),
-                        'is_heading' => isset($secHeadings[$i]),
+                        'section_description' => $desc,
+                        'is_heading' => $desc === '' ? true : false,
                         'sort_order' => $i,
                     ]);
                 }
@@ -444,8 +452,21 @@ class QuoteController extends Controller
             }
         }
 
+        // FMB Certificate images as base64
+        $fmbCert1Base64 = '';
+        $fmbCert1Path = public_path('assets/img/fmb-certificate-1.jpg');
+        if (file_exists($fmbCert1Path)) {
+            $fmbCert1Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($fmbCert1Path));
+        }
+
+        $fmbCert2Base64 = '';
+        $fmbCert2Path = public_path('assets/img/fmb-certificate-2.jpg');
+        if (file_exists($fmbCert2Path)) {
+            $fmbCert2Base64 = 'data:image/jpeg;base64,' . base64_encode(file_get_contents($fmbCert2Path));
+        }
+
         // Render the Blade view to HTML
-        $html = view('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos'))->render();
+        $html = view('quotes.pdf', compact('quote', 'notes', 'sections', 'pricing', 'logoBase64', 'workPhotos', 'fmbCert1Base64', 'fmbCert2Base64'))->render();
 
         // Create mPDF instance
         $mpdf = new Mpdf([

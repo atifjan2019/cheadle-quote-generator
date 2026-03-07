@@ -482,6 +482,25 @@
             font-style: italic;
             margin-top: 8px;
         }
+
+        /* FMB Certificate pages */
+        .fmb-page {
+            text-align: center;
+            padding: 0;
+            margin: 0;
+        }
+
+        .fmb-page .fmb-body {
+            padding: 30px 45px 30px 45px;
+            text-align: center;
+        }
+
+        .fmb-page .fmb-img {
+            max-width: 100%;
+            max-height: 920px;
+            width: auto;
+            height: auto;
+        }
     </style>
 </head>
 
@@ -591,7 +610,7 @@
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span> &middot; Building Excellence, Greater Manchester
                 </td>
-                <td style="text-align: right;">Page 1 of 5 &nbsp;&middot;&nbsp; {{ $projectRef }}</td>
+                <td style="text-align: right;">Page 1 of 7 &nbsp;&middot;&nbsp; {{ $projectRef }}</td>
             </tr>
         </table>
     </div>
@@ -631,7 +650,7 @@
         <table class="pg-footer">
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span></td>
-                <td style="text-align: right;">Page 2 of 5</td>
+                <td style="text-align: right;">Page 2 of 7</td>
             </tr>
         </table>
     </div>
@@ -672,7 +691,7 @@
         <table class="pg-footer">
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span></td>
-                <td style="text-align: right;">Page 3 of 5</td>
+                <td style="text-align: right;">Page 3 of 7</td>
             </tr>
         </table>
     </div>
@@ -786,7 +805,7 @@
             <table class="pg-footer">
                 <tr>
                     <td><span class="brand">Cheadle Construction Ltd</span></td>
-                    <td style="text-align: right;">Page 4 of 5</td>
+                    <td style="text-align: right;">Page 4 of 7</td>
                 </tr>
             </table>
         </div>
@@ -794,7 +813,59 @@
 
     <pagebreak />
 
-    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 5 — PROJECT NOTES ░░░░░░░░░░░░░░░░░░ --}}
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 5 — FMB CERTIFICATE 1 ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="fmb-page">
+        <div class="inner-top-bar"></div>
+        <div class="fmb-body">
+            <table class="inner-hdr">
+                <tr>
+                    <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                    <td class="inner-hdr-title">FMB Membership</td>
+                </tr>
+            </table>
+
+            @if($fmbCert1Base64)
+                <img src="{{ $fmbCert1Base64 }}" class="fmb-img" alt="FMB Membership Certificate">
+            @endif
+
+            <table class="pg-footer">
+                <tr>
+                    <td><span class="brand">Cheadle Construction Ltd</span></td>
+                    <td style="text-align: right;">Page 5 of 7</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <pagebreak />
+
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 6 — FMB CERTIFICATE 2 ░░░░░░░░░░░░░░░░░░ --}}
+    <div class="fmb-page">
+        <div class="inner-top-bar"></div>
+        <div class="fmb-body">
+            <table class="inner-hdr">
+                <tr>
+                    <td>@if($logoBase64)<img src="{{ $logoBase64 }}" class="inner-hdr-logo" alt="">@endif</td>
+                    <td class="inner-hdr-title">FMB Membership</td>
+                </tr>
+            </table>
+
+            @if($fmbCert2Base64)
+                <img src="{{ $fmbCert2Base64 }}" class="fmb-img" alt="FMB Membership Certificate">
+            @endif
+
+            <table class="pg-footer">
+                <tr>
+                    <td><span class="brand">Cheadle Construction Ltd</span></td>
+                    <td style="text-align: right;">Page 6 of 7</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <pagebreak />
+
+    {{-- ░░░░░░░░░░░░░░░░░░ PAGE 7 — PROJECT NOTES ░░░░░░░░░░░░░░░░░░ --}}
     <div class="inner-top-bar"></div>
     <div class="inner-body">
         <table class="inner-hdr">
@@ -816,35 +887,39 @@
             <tr>
                 <td class="bullet">&rsaquo;</td>
                 <td>Substructures are based on assumed good ground conditions and are without the benefit of a
-                    geological survey. The depths of foundation and design may be subject to change by site conditions
-                    and/or on the instruction of Building Control, client&rsquo;s Engineer or Architect. In the event of
-                    change of foundation design the Contractor reserves the right to amend the Contract Sum by way of
-                    re-measurement.</td>
+                    geological survey; The depths of foundation and foundation design may be subject to change by
+                    site conditions and/or on the instruction of Building Control or clients Engineer or Architect. In the
+                    event of change of design and/or depth of foundation the Contractor reserves the right to amend
+                    the Contract Sum by way of re-measurement of the revised foundation design and depth.</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>All waste to be disposed of.</td>
+                <td>All waste to be disposed of</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>Structural costs are subject to engineer&rsquo;s design/Calcs if not presented prior to costing.
-                </td>
+                <td>Structural costs are subject to engineer&rsquo;s design/Calcs if not presented prior to costing.</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>No allowance for landscaping at this stage but have allowed to infill excavated areas with MOT.</td>
+                <td>No allowance for landscaping at this stage but have allowed to infill excavated areas with MOT</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>No allowance for kitchen or utility purchase.</td>
+                <td>Please note we have not allowed for any re screeding of floor levels at this stage, unless stated
+                    otherwise.</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>We have assumed that the existing RCD Board / Consumer Unit is suitable to remain.</td>
+                <td>No allowance for kitchen or utility purchase</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>No allowance for Building Control services at this stage but can be arranged at cost.</td>
+                <td>We have assumed that the existing RCD Board / Consumer Unit is suitable to remain</td>
+            </tr>
+            <tr>
+                <td class="bullet">&rsaquo;</td>
+                <td>No allowance for Building Control services at this stage but can be arranged at cost</td>
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
@@ -852,34 +927,43 @@
             </tr>
             <tr>
                 <td class="bullet">&rsaquo;</td>
-                <td>Best endeavours to protect driveways from damage &mdash; we accept no responsibility. Once
-                    protection is in place, any concerns please report to a member of staff.</td>
+                <td>Best endeavours to protect driveways from damage we accept no reasonability for damage.
+                    Once protection is in place any concerns please report to a member of staff</td>
             </tr>
         </table>
 
-        <div class="pn-heading">Structural Works &mdash; Deflection, Movement and Settlement</div>
-        <p class="pn-text">Whilst great care will be taken by our time served tradesmen, a tolerance for deflection,
-            movement and settlement is to be expected during and following completion of structural works. This could
-            result in settlement cracking to localised areas and damage to decor away from the work area. We will work
-            with the client to address these issues at cost in the rare event remedial works are required.</p>
+        <div class="pn-heading">Undertaking Structural Works &mdash; Deflection, Movement and Settlement</div>
+        <p class="pn-text">Please note that whilst great care will be taken by our time served tradesmen to
+            undertake these works, with all structural works, a tolerance for deflection, movement
+            and settlement is to be expected during and following the completion of the works.
+            This could result in the appearance of settlement cracking to localised areas and
+            damage to decor in areas away from the work area. In some cases, easing of doors to
+            the floor above the work area might be required.</p>
+        <p class="pn-text">Whilst we have not allowed for these issues in our cost, we will work with the client to
+            address these issues at cost in the rare event that remedial works are required.
+            If you have any concerns, please just ask a member of our team.</p>
 
         <div class="pn-heading">Dust Settlement</div>
-        <p class="pn-text">Due to the nature of these works there may be residual dust settlement. Whilst we make best
-            endeavours to keep the area clean, we cannot guarantee additional cleaning won&rsquo;t be required.</p>
+        <p class="pn-text">Please note, due to the nature of these works there may be some residual dust
+            settlement. Whilst we will make best endeavours to keep the area clean, we can&rsquo;t
+            guarantee that additional cleaning won&rsquo;t be required.</p>
 
         <div class="pn-heading">Building Control</div>
-        <p class="pn-text">These works are notifiable under building control laws. We can handle the application on the
-            client&rsquo;s behalf, subject to fee quoted by our provider.</p>
+        <p class="pn-text">Please note that these works are notifiable under building control laws &mdash; We can handle the
+            application on the client&rsquo;s behalf subject to fee quoted by our provider.</p>
 
         <div class="pn-heading">Payments</div>
-        <p class="pn-text">A payment schedule and FMB contract will be provided upon acceptance. Final payment is to be
-            made once we reach the final build stage, regardless of any delays outside our control.</p>
+        <p class="pn-text"><strong>Payments</strong> &ndash; A payment schedule will be provided, along with an FMB contract upon acceptance of the
+            quotation. Final payment is to be paid in line with schedule, however, sometimes circumstances out
+            of our control may affect the completion of your project, eg delays in kitchen appliances, building
+            control to issue certificates and other services not provided by ourselves.</p>
+        <p class="pn-text">Final payment is to be made once we reach the final build stage regardless of these circumstances.</p>
 
         <table class="pg-footer">
             <tr>
                 <td><span class="brand">Cheadle Construction Ltd</span> &middot; Registered &middot; Insured &middot;
                     FMB Member &middot; TrustMark Registered</td>
-                <td style="text-align: right;">Page 5 of 5</td>
+                <td style="text-align: right;">Page 7 of 7</td>
             </tr>
         </table>
     </div>

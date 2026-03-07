@@ -30,12 +30,7 @@
             <a href="{{ route('quotes.list') }}">All Quotes</a>
             <span class="breadcrumb-sep">/</span>
             <span class="breadcrumb-current">{{ $isEdit ? e($quote->project_ref ?? 'Edit Quote') : 'New Quote' }}</span>
-            @if($isEdit)
-                <a href="{{ route('quotes.pdf', ['id' => $id]) }}" class="btn btn-outline btn-sm" style="margin-left:auto;" target="_blank">
-                    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                    Download PDF
-                </a>
-            @endif
+
         </div>
 
         <!-- ══ SPLIT LAYOUT ══════════════════════════ -->
@@ -200,7 +195,7 @@
                                             <tr>
                                                 <th style="width:36%">Section / Trade</th>
                                                 <th>Description</th>
-                                                <th style="width:48px;">Hdg</th>
+                                                <th style="width:48px;" title="Show in PDF">👁</th>
                                                 <th style="width:36px;"></th>
                                             </tr>
                                         </thead>
@@ -216,9 +211,8 @@
                                                             value="{{ e($secName) }}" oninput="renderPreview()"></td>
                                                     <td><textarea class="sd" name="sec_desc[]"
                                                             oninput="renderPreview()">{{ e($secDesc) }}</textarea></td>
-                                                    <td style="text-align:center;vertical-align:middle;"><input type="checkbox"
-                                                            name="sec_heading[]" value="1" {{ $secHdg ? 'checked' : '' }}
-                                                            onchange="renderPreview()" title="Section heading"></td>
+                                                    <td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="sec_visible[]" value="1" {{ ($isEdit && count($sections)) ? 'checked' : '' }}
+                                                            onchange="renderPreview()" title="Show in PDF"></td>
                                                     <td><button type="button" class="rm-btn"
                                                             onclick="this.closest('tr').remove();renderPreview()">✕</button>
                                                     </td>
@@ -310,15 +304,7 @@
                             </svg>
                             Save Quote
                         </button>
-                        @if($isEdit)
-                            <a href="{{ route('quotes.pdf', ['id' => $id]) }}" class="btn btn-secondary" target="_blank">
-                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" width="15"
-                                    height="15">
-                                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" />
-                                </svg>
-                                Download PDF
-                            </a>
-                        @endif
+
                         <a href="{{ route('quotes.index') }}" class="btn btn-outline">Cancel</a>
                         <div class="autosave-bar">
                             <div class="autosave-dot" id="autosaveDot"></div>
@@ -469,7 +455,7 @@
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong> &middot; Building Excellence,
                                                     Greater Manchester</td>
-                                                <td style="text-align:right;">Page 1 of 5 &nbsp;&middot;&nbsp; <span
+                                                <td style="text-align:right;">Page 1 of 7 &nbsp;&middot;&nbsp; <span
                                                         id="p_ref_foot1">{{ e($quote['project_ref'] ?? '') }}</span></td>
                                             </tr>
                                         </table>
@@ -495,7 +481,7 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:40px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 2 of 5</td>
+                                                <td style="text-align:right;">Page 2 of 7</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -517,7 +503,7 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 3 of 5</td>
+                                                <td style="text-align:right;">Page 3 of 7</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -561,13 +547,57 @@
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong></td>
-                                                <td style="text-align:right;">Page 4 of 5</td>
+                                                <td style="text-align:right;">Page 4 of 7</td>
                                             </tr>
                                         </table>
                                     </div>
                                 </div>
 
-                                <!-- PAGE 5: PROJECT NOTES -->
+                                <!-- PAGE 5: FMB CERTIFICATE 1 -->
+                                <div class="pdoc-page">
+                                    <div class="pdoc-accent-bar"></div>
+                                    <div class="pdoc-inner-page">
+                                        <table class="pdoc-inner-header">
+                                            <tr>
+                                                <td><img src="{{ asset('assets/img/logo.png') }}" class="pdoc-inner-logo" alt=""></td>
+                                                <td class="pdoc-inner-title">FMB Membership</td>
+                                            </tr>
+                                        </table>
+                                        <div style="text-align:center;padding:20px 0;">
+                                            <img src="{{ asset('assets/img/fmb-certificate-1.jpg') }}" style="max-width:100%;max-height:750px;width:auto;height:auto;" alt="FMB Membership Certificate">
+                                        </div>
+                                        <table class="pdoc-foot-tbl" style="margin-top:32px;">
+                                            <tr>
+                                                <td><strong>Cheadle Construction Ltd</strong></td>
+                                                <td style="text-align:right;">Page 5 of 7</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- PAGE 6: FMB CERTIFICATE 2 -->
+                                <div class="pdoc-page">
+                                    <div class="pdoc-accent-bar"></div>
+                                    <div class="pdoc-inner-page">
+                                        <table class="pdoc-inner-header">
+                                            <tr>
+                                                <td><img src="{{ asset('assets/img/logo.png') }}" class="pdoc-inner-logo" alt=""></td>
+                                                <td class="pdoc-inner-title">FMB Membership</td>
+                                            </tr>
+                                        </table>
+                                        <div style="text-align:center;padding:20px 0;">
+                                            <img src="{{ asset('assets/img/fmb-certificate-2.jpg') }}" style="max-width:100%;max-height:750px;width:auto;height:auto;" alt="FMB Membership Certificate">
+                                        </div>
+                                        <table class="pdoc-foot-tbl" style="margin-top:32px;">
+                                            <tr>
+                                                <td><strong>Cheadle Construction Ltd</strong></td>
+                                                <td style="text-align:right;">Page 6 of 7</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- PAGE 7: PROJECT NOTES -->
                                 <div class="pdoc-page">
                                     <div class="pdoc-accent-bar"></div>
                                     <div class="pdoc-inner-page">
@@ -584,30 +614,54 @@
                                         <div class="pdoc-pn-item">No allowance for floor covering at this stage unless
                                             stated otherwise.</div>
                                         <div class="pdoc-pn-item">Substructures are based on assumed good ground conditions
-                                            and are without the benefit of a geological survey.</div>
-                                        <div class="pdoc-pn-item">All waste to be disposed of.</div>
+                                            and are without the benefit of a geological survey; The depths of foundation and foundation design may be subject to change by
+                                            site conditions and/or on the instruction of Building Control or clients Engineer or Architect. In the
+                                            event of change of design and/or depth of foundation the Contractor reserves the right to amend
+                                            the Contract Sum by way of re-measurement of the revised foundation design and depth.</div>
+                                        <div class="pdoc-pn-item">All waste to be disposed of</div>
                                         <div class="pdoc-pn-item">Structural costs are subject to engineer's design/Calcs if
                                             not presented prior to costing.</div>
                                         <div class="pdoc-pn-item">No allowance for landscaping at this stage but have
-                                            allowed to infill excavated areas with MOT.</div>
-                                        <div class="pdoc-pn-item">No allowance for kitchen or utility purchase.</div>
+                                            allowed to infill excavated areas with MOT</div>
+                                        <div class="pdoc-pn-item">Please note we have not allowed for any re screeding of floor levels at this stage, unless stated
+                                            otherwise.</div>
+                                        <div class="pdoc-pn-item">No allowance for kitchen or utility purchase</div>
                                         <div class="pdoc-pn-item">We have assumed that the existing RCD Board / Consumer
-                                            Unit is suitable to remain.</div>
+                                            Unit is suitable to remain</div>
                                         <div class="pdoc-pn-item">No allowance for Building Control services at this stage
-                                            but can be arranged at cost.</div>
-                                        <div class="pdoc-pn-section">Structural Works &mdash; Deflection, Movement and
+                                            but can be arranged at cost</div>
+                                        <div class="pdoc-pn-item">External drainage subject to inspection and final layout might differ from drawings.</div>
+                                        <div class="pdoc-pn-item">Best endeavours to protect driveways from damage we accept no reasonability for damage.
+                                            Once protection is in place any concerns please report to a member of staff</div>
+                                        <div class="pdoc-pn-section">Undertaking Structural Works &mdash; Deflection, Movement and
                                             Settlement</div>
-                                        <p class="pdoc-pn-text">Whilst great care will be taken by our time served
-                                            tradesmen, a tolerance for deflection, movement and settlement is to be
-                                            expected.</p>
+                                        <p class="pdoc-pn-text">Please note that whilst great care will be taken by our time served
+                                            tradesmen to undertake these works, with all structural works, a tolerance for deflection, movement
+                                            and settlement is to be expected during and following the completion of the works.
+                                            This could result in the appearance of settlement cracking to localised areas and
+                                            damage to decor in areas away from the work area. In some cases, easing of doors to
+                                            the floor above the work area might be required.</p>
+                                        <p class="pdoc-pn-text">Whilst we have not allowed for these issues in our cost, we will work with the client to
+                                            address these issues at cost in the rare event that remedial works are required.
+                                            If you have any concerns, please just ask a member of our team.</p>
+                                        <div class="pdoc-pn-section">Dust Settlement</div>
+                                        <p class="pdoc-pn-text">Please note, due to the nature of these works there may be some residual dust
+                                            settlement. Whilst we will make best endeavours to keep the area clean, we can't
+                                            guarantee that additional cleaning won't be required.</p>
+                                        <div class="pdoc-pn-section">Building Control</div>
+                                        <p class="pdoc-pn-text">Please note that these works are notifiable under building control laws &mdash; We can handle the
+                                            application on the client's behalf subject to fee quoted by our provider.</p>
                                         <div class="pdoc-pn-section">Payments</div>
-                                        <p class="pdoc-pn-text">A payment schedule and FMB contract will be provided upon
-                                            acceptance.</p>
+                                        <p class="pdoc-pn-text"><strong>Payments</strong> &ndash; A payment schedule will be provided, along with an FMB contract upon acceptance of the
+                                            quotation. Final payment is to be paid in line with schedule, however, sometimes circumstances out
+                                            of our control may affect the completion of your project, eg delays in kitchen appliances, building
+                                            control to issue certificates and other services not provided by ourselves.</p>
+                                        <p class="pdoc-pn-text">Final payment is to be made once we reach the final build stage regardless of these circumstances.</p>
                                         <table class="pdoc-foot-tbl" style="margin-top:32px;">
                                             <tr>
                                                 <td><strong>Cheadle Construction Ltd</strong> &middot; Registered &middot;
                                                     Insured &middot; FMB Member &middot; TrustMark Registered</td>
-                                                <td style="text-align:right;">Page 5 of 5</td>
+                                                <td style="text-align:right;">Page 7 of 7</td>
                                             </tr>
                                         </table>
                                     </div>
@@ -740,12 +794,12 @@
             rows.forEach(function (row) {
                 var nameEl = row.querySelector('input.sn');
                 var descEl = row.querySelector('textarea.sd');
-                var headEl = row.querySelector('input[type=checkbox]');
+                var visEl = row.querySelector('input[type=checkbox]');
                 var name = nameEl ? nameEl.value.trim() : '';
                 var desc = descEl ? descEl.value.trim() : '';
-                var heading = headEl && headEl.checked;
-                if (!name) return;
-                if (heading) {
+                var visible = visEl && visEl.checked;
+                if (!name || !visible) return;
+                if (!desc) {
                     html += '<tr class="scope-group"><td colspan="2">' + escHtml(name) + '</td></tr>';
                 } else {
                     html += '<tr class="scope-row"><td class="scope-label">' + escHtml(name) + '</td><td>' + escHtml(desc).replace(/\n/g, '<br>') + '</td></tr>';
@@ -833,7 +887,7 @@
             const tr = document.createElement('tr');
             tr.innerHTML = '<td><input type="text" class="sn" name="sec_name[]" value="' + escHtml(name) + '" placeholder="Section name..." oninput="renderPreview()"></td>'
                 + '<td><textarea class="sd" name="sec_desc[]" oninput="renderPreview()">' + escHtml(desc) + '</textarea></td>'
-                + '<td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="sec_heading[]" value="1"' + (heading ? ' checked' : '') + ' onchange="renderPreview()"></td>'
+                + '<td style="text-align:center;vertical-align:middle;"><input type="checkbox" name="sec_visible[]" value="1" onchange="renderPreview()" title="Show in PDF"></td>'
                 + '<td><button type="button" class="rm-btn" onclick="this.closest(\'tr\').remove();renderPreview()">\u2715</button></td>';
             tbody.appendChild(tr);
             renderPreview();
@@ -904,12 +958,16 @@
 
             // Scope sections
             document.querySelectorAll('#scopeBody tr').forEach(function (row, i) {
-                const nameEl = row.querySelector('input.sn');
-                const descEl = row.querySelector('textarea.sd');
-                const headEl = row.querySelector('input[type=checkbox]');
+                var nameEl = row.querySelector('input.sn');
+                var descEl = row.querySelector('textarea.sd');
+                var visEl = row.querySelector('input[type=checkbox]');
                 if (nameEl) fd.append('sec_name[' + i + ']', nameEl.value);
                 if (descEl) fd.append('sec_desc[' + i + ']', descEl.value);
-                if (headEl && headEl.checked) fd.append('sec_heading[' + i + ']', '1');
+                // Auto-detect heading from empty description
+                var desc = descEl ? descEl.value.trim() : '';
+                if (!desc && nameEl && nameEl.value.trim()) fd.append('sec_heading[' + i + ']', '1');
+                // Track visibility
+                if (visEl && visEl.checked) fd.append('sec_visible[' + i + ']', '1');
             });
 
             // Pricing
